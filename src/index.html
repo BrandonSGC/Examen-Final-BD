@@ -25,8 +25,51 @@
     </header>
 
     <!-- BUSCAR VUELO -->
-    <main class="">
-        
+    <main class="main">
+        <div class="main__container">
+            <h2 class="main__heading">Millions of cheap flights. One simple search.</h2>
+            <form class="flightForm" action="" method>
+                <fieldset class="form__fieldset">
+                    <div class="form__field">
+                        <label class="form__label" for="">Desde:</label>
+                        <input class="form__input" placeholder="Ejemplo: San José" type="text" name="" id="">
+                    </div>
+                    <div class="form__field">
+                        <label class="form__label" for="">Fecha de Salida:</label>
+                        <input class="form__input" type="date" name="" id="">
+                    </div>
+                </fieldset>
+
+                <fieldset class="form__fieldset">
+                    <div class="form__field">
+                        <label class="form__label" for="">Hacia:</label>
+                        <input class="form__input" placeholder="Ejemplo: Cancún" type="text" name="" id="">
+                    </div>
+                    
+                    <div class="form__field">
+                        <label class="form__label" for="">Fecha de Regreso:</label>
+                        <input class="form__input" type="date" name="" id="">
+                    </div>
+                </fieldset>
+
+                <fieldset class="form__fieldset form__fieldset-btn">
+                    <div class="form__field">
+                        <label class="form__label" for="">Personas:</label>
+                        <input class="form__input" placeholder="Ejemplo: 3" type="number" name="" id="">
+                    </div>
+                    <button class="form__button">Buscar</button>
+                </fieldset>
+            </form>
+        </div>
     </main>
+
+    <section class="section">
+        <div class="section__container">
+            <h2 class="section__heading">Vuelos</h2>
+            <section class="section__display">
+
+            </section>
+        </div>
+    </section>
 </body>
 </html>
