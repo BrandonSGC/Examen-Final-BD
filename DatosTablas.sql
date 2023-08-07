@@ -1,3 +1,4 @@
+USE ExamenFinalBD;
 INSERT INTO Rol (RolID, Descripción_del_rol)
 VALUES
     (1, 'Administrador'),

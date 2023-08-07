@@ -10,7 +10,7 @@ const config = {
     user: "sa",
     password: "root",
     server: "localhost",
-    database: "Amazon",
+    database: "ExamenFinalBD",
     options: {
       encrypt: true,
       trustServerCertificate: true,

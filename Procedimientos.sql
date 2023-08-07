@@ -1,3 +1,4 @@
+USE ExamenFinalBD;
 --Historial de pagos
 CREATE PROCEDURE ConsultarHistorialPagos
     @ReservaID INT
