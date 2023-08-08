@@ -19,3 +19,32 @@ const config = {
 
 
 // Functions
+
+async function spRegistrarUsuario(email, contrasena, rolID, identificacion, nombre, apellido, fechaNacimiento, telefono) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input("Email", sql.VarChar(100), email)
+      .input("Contraseña", sql.VarChar(100), contrasena)
+      .input("RolID", sql.Int, rolID)
+      .input("Identificacion", sql.VarChar(20), identificacion)
+      .input("Nombre", sql.VarChar(50), nombre)
+      .input("Apellido", sql.VarChar(50), apellido)
+      .input("Fecha_de_nacimiento", sql.Date, fechaNacimiento)
+      .input("Número_de_teléfono", sql.VarChar(20), telefono)
+      // Este es el nombre del procedimiento almacenado que vamos a llamar.
+      .execute("RegistrarUsuario");
+
+    pool.close();
+  } catch (err) {
+    console.error("Error executing the stored procedure spRegistrarUsuario:", err);
+  }
+}
+
+// Aqui ponemos las funciones que vamos a exportar para luego usar estas funciones en el archivo que ocupemos. En este caso el "index.js"
+module.exports = {
+  spRegistrarUsuario,
+  // Aqui solo pone el nombre de la funcion y la coma y ya.
+};

@@ -241,3 +241,11 @@ li {
 .menu__link {
     color: var(--white);
 }
+
+/* Mantenimientos Usuarios */
+.usersForm {
+    background-color: var(--darkBlue);
+    color: var(--white);
+    padding: 2rem;
+    max-width: 60rem;
+}

@@ -9,11 +9,12 @@ CREATE TABLE Rol (
 
 -- Creación de la tabla Usuarios
 CREATE TABLE Usuario (
-    UserID INT PRIMARY KEY,
+    UserID INT IDENTITY(1,1) PRIMARY KEY,
     Email VARCHAR(100),
     Contraseña VARCHAR(50),
     RolID INT FOREIGN KEY REFERENCES Rol(RolID)
 );
+
 
 -- Creación de la tabla Permisos
 CREATE TABLE Permiso (
