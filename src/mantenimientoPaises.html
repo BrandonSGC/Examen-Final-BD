@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/normalize.css">
     <link rel="stylesheet" href="./styles/styles.css">
-    <title>Configuración Roles - Permisos</title>
+    <title>Mantenimiento Países</title>
 </head>
 <body>
     <!-- HEADER -->
@@ -24,30 +24,19 @@
         </div>
     </header>
 
-    <!-- CONFIGURACION DE ROLES - PERMISOS -->
+    <!-- FORMULARIO DE PAISES -->
     <section class="section">
         <div class="section__container">
-            <h2 class="section__heading">Configuración Roles - Permisos</h2>
-            <form action="/configurarRolPermiso" method="post" class="form" id="rolesPermisosForm">
+            <h2 class="section__heading">Mantenimiento de Países</h2>
+            <form action="/registrarPais" method="post" class="form" id="paisForm">
                 <fieldset class="form__fieldset">
                     <div class="form__field">
-                        <label for="rol" class="form__label">Rol:</label>
-                        <select class="form__input" name="rol" id="rol">
-                            <option value="">--Seleccione un Rol</option>
-                            <!-- Aqui se van a cargar los demas roles de la base de datos -->
-                        </select>
-                    </div>
-
-                    <div class="form__field">
-                        <label for="permiso" class="form__label">Permiso:</label>
-                        <select class="form__input" name="permiso" id="permiso">
-                            <option value="">--Seleccione un Permiso</option>
-                            <!-- Aqui se van a cargar los demas permisos de la base de datos -->
-                        </select>
+                        <label for="descripcion" class="form__label">Nombre del País:</label>
+                        <input class="form__input" type="text" name="descripcion" id="descripcion">
                     </div>
                 </fieldset>
 
-                <button class="form__button" type="submit">Configurar</button>
+                <button class="form__button" type="submit">Registrar País</button>
             </form>
         </div>
     </section>
