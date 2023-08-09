@@ -116,7 +116,13 @@ li {
     color: var(--white);
     padding: 2rem;
     max-width: 60rem;
+    margin: 0 auto;
 }
+
+/* #usersForm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+} */
 
 .form__fieldset {
     display: flex;
