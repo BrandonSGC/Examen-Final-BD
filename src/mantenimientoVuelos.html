@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/normalize.css">
     <link rel="stylesheet" href="./styles/styles.css">
-    <title>Mantenimiento Ciudades</title>
+    <title>Mantenimiento Vuelos</title>
 </head>
 <body>
     <!-- HEADER -->
@@ -24,27 +24,54 @@
         </div>
     </header>
 
-    <!-- FORMULARIO DE CIUDADES -->
+    <!-- FORMULARIO DE VUELOS -->
     <section class="section">
         <div class="section__container">
-            <h2 class="section__heading">Mantenimiento de Ciudades</h2>
-            <form action="/registrarCiudad" method="post" class="form" id="ciudadForm">
+            <h2 class="section__heading">Mantenimiento de Vuelos</h2>
+            <form action="/registrarVuelo" method="post" class="form" id="vuelosForm">
                 <fieldset class="form__fieldset">
                     <div class="form__field">
-                        <label for="descripcion" class="form__label">Nombre de la Ciudad:</label>
-                        <input class="form__input" type="text" name="descripcion" id="descripcion">
-                    </div>
-                    
-                    <div class="form__field">
-                        <label for="pais" class="form__label">País de la ciudad:</label>
-                        <select class="form__input" name="pais" id="pais">
-                            <option value="">--Seleccione el País</option>
-                            <!-- Aqui vamos a cargar los paises de la base de datos -->
+                        <label for="origen" class="form__label">Origen:</label>
+                        <select class="form__input" name="origen" id="origen">
+                            <option value="">--Seleccione el Aereopuerto</option>
                         </select>
+                    </div>
+                    <div class="form__field">
+                        <label for="destino" class="form__label">Destino:</label>
+                        <select class="form__input" name="destino" id="destino">
+                            <option value="">--Seleccione el Aereopuerto</option>
+                        </select>
+                    </div>
+
+                </fieldset>
+
+                <fieldset class="form__fieldset">
+                    <div class="form__field">
+                        <label for="fechaVuelo" class="form__label">Fecha del Vuelo:</label>
+                        <input class="form__input" type="date" name="fechaVuelo" id="fechaVuelo">
+                    </div>
+
+                    <div class="form__field">
+                        <label for="horaSalida" class="form__label">Hora Salida:</label>
+                        <input class="form__input" type="text" name="horaSalida" id="horaSalida">
+                    </div>
+                    <div class="form__field">
+                        <label for="horaLlegada" class="form__label">Hora Llegada:</label>
+                        <input class="form__input" type="text" name="horaLlegada" id="horaLlegada">
                     </div>
                 </fieldset>
 
-                <button class="form__button" type="submit">Registrar Ciudad</button>
+
+                <fieldset class="form__fieldset">
+                    <div class="form__field">
+                        <label for="tarifas" class="form__label">Tipo de Tarifa:</label>
+                        <select class="form__input" name="tarifas" id="tarifas">
+                            <option value="">-- Seleccione una Tarifa</option>
+                            <!-- Aqui se van a insertar las tarifas que hayan en la base de datos -->
+                        </select>
+                    </div>
+                </fieldset>
+                <button class="form__button" type="submit">Registrar Usuario</button>
             </form>
         </div>
     </section>

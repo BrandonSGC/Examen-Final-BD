@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/normalize.css">
     <link rel="stylesheet" href="./styles/styles.css">
-    <title>Mantenimiento Ciudades</title>
+    <title>Mantenimiento Aereopuertos</title>
 </head>
 <body>
     <!-- HEADER -->
@@ -24,27 +24,27 @@
         </div>
     </header>
 
-    <!-- FORMULARIO DE CIUDADES -->
+    <!-- FORMULARIO DE AEREOPUERTOS -->
     <section class="section">
         <div class="section__container">
-            <h2 class="section__heading">Mantenimiento de Ciudades</h2>
-            <form action="/registrarCiudad" method="post" class="form" id="ciudadForm">
+            <h2 class="section__heading">Mantenimiento de Vuelos</h2>
+            <form action="/registrarAereopuerto" method="post" class="form" id="aereopuertosForm">
                 <fieldset class="form__fieldset">
                     <div class="form__field">
-                        <label for="descripcion" class="form__label">Nombre de la Ciudad:</label>
-                        <input class="form__input" type="text" name="descripcion" id="descripcion">
+                        <label for="nombre" class="form__label">Nombre del Aereopuerto:</label>
+                        <input class="form__input" type="text" name="nombre" id="nombre">
                     </div>
                     
                     <div class="form__field">
-                        <label for="pais" class="form__label">País de la ciudad:</label>
-                        <select class="form__input" name="pais" id="pais">
-                            <option value="">--Seleccione el País</option>
-                            <!-- Aqui vamos a cargar los paises de la base de datos -->
+                        <label for="ciudad" class="form__label">Ciudad del Aereopuerto:</label>
+                        <select class="form__input" name="ciudad" id="ciudad">
+                            <option value="">-- Seleccione un Ciudad</option>
+                            <!-- Aqui se van a insertar las ciudades que hayan en la base de datos -->
                         </select>
                     </div>
-                </fieldset>
 
-                <button class="form__button" type="submit">Registrar Ciudad</button>
+                </fieldset>
+                <button class="form__button" type="submit">Registrar Aereopuerto</button>
             </form>
         </div>
     </section>

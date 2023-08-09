@@ -234,20 +234,19 @@ li {
     gap: 1rem;
     align-items: center;
 }
-.menu__item {
-    background-color: var(--lightBlue);
-    padding: 1rem;
-    width: 30rem;
-    text-align: center;
-    border-radius: .3rem;
-    cursor: pointer;
-}
+
 .menu__item:hover {
     background-color: var(--darkBlue);
     transition: .3s;
 }
 .menu__link {
+    display: block;
     color: var(--white);
+    background-color: var(--lightBlue);
+    padding: 1rem;
+    width: 30rem;
+    text-align: center;
+    border-radius: .3rem;
 }
 
 /* Mantenimientos Usuarios */
