@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/normalize.css">
     <link rel="stylesheet" href="./styles/styles.css">
-    <title>Configuración</title>
+    <title>Mantenimiento Ciudades</title>
 </head>
 <body>
     <!-- HEADER -->
@@ -24,48 +24,23 @@
         </div>
     </header>
 
-    <section class="menus">
-        <div class="menu__container">
-            <h2 class="menu__heading">Configuración</h2>
-            <ul class="menu__list">
-                <li class="menu__item">
-                    <a class="menu__link" href="./mantenimientoUsuarios.html">Mantenimiento de Usuarios</a>
-                </li>
+    <!-- FORMULARIO DE PAISES -->
+    <section class="section">
+        <div class="section__container">
+            <h2 class="section__heading">Mantenimiento de Ciudades</h2>
+            <form action="/registrarCiudad" method="post" class="form" id="ciudadForm">
+                <fieldset class="form__fieldset">
+                    <div class="form__field">
+                        <label for="descripcion" class="form__label">Nombre de la Ciudad:</label>
+                        <input class="form__input" type="text" name="descripcion" id="descripcion">
+                    </div>
+                </fieldset>
 
-                <li class="menu__item">
-                    <a class="menu__link" href="./mantenimientoRoles.html">Mantenimiento de Roles</a>
-                </li>
-
-                <li class="menu__item">
-                    <a class="menu__link" href="./mantenimientoPermisos.html">Mantenimiento de Permisos</a>
-                </li>
-
-                <li class="menu__item">
-                    <a class="menu__link" href="./configRolesPermisos.html">Configuración Roles - Permisos</a>
-                </li>
-
-                <li class="menu__item">
-                    <a class="menu__link" href="./mantenimientoTipoTarifa.html">Mantenimiento de Tarifa</a>
-                </li>
-
-                <li class="menu__item">
-                    <a class="menu__link" href="./mantenimientoMoneda.html">Mantenimiento de Moneda</a>
-                </li>
-
-                <li class="menu__item">
-                    <a class="menu__link" href="./mantenimientoPaises.html">Mantenimiento de Países</a>
-                </li>
-
-                <li class="menu__item">
-                    <a class="menu__link" href="./mantenimientoCiudades.html">Mantenimiento de Ciudades</a>
-                </li>
-
-                <li class="menu__item">
-                    <a class="menu__link" href="#">Mantenimiento de Vuelos</a>
-                </li>
-            </ul>
+                <button class="form__button" type="submit">Registrar Ciudad</button>
+            </form>
         </div>
     </section>
+
 
     <!-- FOOTER -->
     <footer class="footer">
