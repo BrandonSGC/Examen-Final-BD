@@ -32,10 +32,105 @@ async function spObtenerRoles() {
       return result.recordset;
       pool.close();
     } else {
-      return 'No se han encontrado datos';
+      return 'No se han encontrado roles.';
     }
   } catch {
     console.error("Error al obtener los roles.");
+  }
+}
+
+async function spObtenerPermisos() {
+  try {
+    const pool = await sql.connect(config);
+
+    const result = await pool
+      .request()
+      .execute("ConsultarPermisos");
+
+    if (result.recordset.length > 0) {
+      return result.recordset;
+      pool.close();
+    } else {
+      return 'No se han encontrado permisos';
+    }
+  } catch {
+    console.error("Error al obtener los permisos.");
+  }
+}
+
+async function spObtenerPaises() {
+  try {
+    const pool = await sql.connect(config);
+
+    const result = await pool
+      .request()
+      .execute("ConsultarPaises");
+
+    if (result.recordset.length > 0) {
+      return result.recordset;
+      pool.close();
+    } else {
+      return 'No se han encontrado paises.';
+    }
+  } catch {
+    console.error("Error al obtener los paises.");
+  }
+}
+
+async function spObtenerCiudades() {
+  try {
+    const pool = await sql.connect(config);
+
+    const result = await pool
+      .request()
+      .execute("ConsultarCiudades");
+
+    if (result.recordset.length > 0) {
+      return result.recordset;
+      pool.close();
+    } else {
+      return 'No se han encontrado ciudades.';
+    }
+  } catch {
+    console.error("Error al obtener las ciudades.");
+  }
+}
+
+async function spObtenerAereopuertos() {
+  try {
+    const pool = await sql.connect(config);
+
+    const result = await pool
+      .request()
+      .execute("ConsultarAereopuertos");
+
+    if (result.recordset.length > 0) {
+      return result.recordset;
+      pool.close();
+    } else {
+      return 'No se han encontrado aereopuertos.';
+    }
+  } catch {
+    console.error("Error al obtener aereopuertos.");
+  }
+}
+
+async function spObtenerTiposDeTarifas() {
+  try {
+    const pool = await sql.connect(config);
+
+    const result = await pool
+      .request()
+      .execute("ConsultarTiposDeTarifas");
+
+    if (result.recordset.length > 0) {
+      return result.recordset;
+      pool.close();
+    } else {
+      return 'No se han encontrado Tipos de Tarifas.';
+    }
+  } catch {
+    console.error("Error al obtener los Tipos de Tarifas.");
   }
 }
 
@@ -69,5 +164,10 @@ async function spRegistrarUsuario(email, contrasena, rolID, identificacion, nomb
 module.exports = {
   spRegistrarUsuario,
   spObtenerRoles,
+  spObtenerPermisos,
+  spObtenerCiudades,
+  spObtenerPaises,
+  spObtenerAereopuertos,
+  spObtenerTiposDeTarifas,
   // Aqui solo pone el nombre de la funcion y la coma y ya.
 };

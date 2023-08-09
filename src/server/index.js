@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Importamos las funciones que estabamos exportando desde el archivo de "connection.js".
-const {spRegistrarUsuario, spObtenerRoles /* Aqui ponemos los otros nombres de las funciones que ocupemos.*/} = require('../db/connection');
+const {spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas/* Aqui ponemos los otros nombres de las funciones que ocupemos.*/} = require('../db/connection');
 
 // Absolute Path
 const path = require("path");
@@ -37,6 +37,56 @@ app.get('/obtenerRoles', async (req, res) => {
         const roles = await spObtenerRoles();
         JSON.stringify(roles);
         res.json(roles);   
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get('/obtenerPermisos', async (req, res) => {
+    try {
+        const permisos = await spObtenerPermisos();
+        JSON.stringify(permisos);
+        res.json(permisos);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get('/obtenerPaises', async (req, res) => {
+    try {
+        const paises = await spObtenerPaises();
+        JSON.stringify(paises);
+        res.json(paises);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get('/obtenerCiudades', async (req, res) => {
+    try {
+        const ciudades = await spObtenerCiudades();
+        JSON.stringify(ciudades);
+        res.json(ciudades);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get('/obtenerAereopuertos', async (req, res) => {
+    try {
+        const aereopuertos = await spObtenerAereopuertos();
+        JSON.stringify(aereopuertos);
+        res.json(aereopuertos);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get('/ObtenerTiposDeTarifas', async (req, res) => {
+    try {
+        const tipoTarifas = await spObtenerTiposDeTarifas();
+        JSON.stringify(tipoTarifas);
+        res.json(tipoTarifas);
     } catch (error) {
         console.log(error);
     }
