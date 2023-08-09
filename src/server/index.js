@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Importamos las funciones que estabamos exportando desde el archivo de "connection.js".
-const {spRegistrarUsuario, /* Aqui ponemos los otros nombres de las funciones que ocupemos.*/} = require('../db/connection');
+const {spRegistrarUsuario, spObtenerRoles /* Aqui ponemos los otros nombres de las funciones que ocupemos.*/} = require('../db/connection');
 
 // Absolute Path
 const path = require("path");
@@ -30,6 +30,16 @@ app.listen(PORT, () => {
 // API
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "..", "index.html"));
+});
+
+app.get('/obtenerRoles', async (req, res) => {
+    try {
+        const roles = await spObtenerRoles();
+        JSON.stringify(roles);
+        res.json(roles);   
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 app.post('/registrarUsuario', async (req, res) => {
