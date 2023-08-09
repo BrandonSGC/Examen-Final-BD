@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/normalize.css">
     <link rel="stylesheet" href="./styles/styles.css">
-    <title>Configuración</title>
+    <title>Mantenimiento Roles</title>
 </head>
 <body>
     <!-- HEADER -->
@@ -24,37 +24,23 @@
         </div>
     </header>
 
-    <section class="menus">
-        <div class="menu__container">
-            <h2 class="menu__heading">Configuración</h2>
-            <ul class="menu__list">
-                <li class="menu__item">
-                    <a class="menu__link" href="./mantenimientoUsuarios.html">Mantenimiento de Usuarios</a>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link" href="./mantenimientoRoles.html">Mantenimiento de Roles</a>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link" href="#">Mantenimiento de Permisos</a>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link" href="#">Mantenimiento de Tarifa</a>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link" href="#">Mantenimiento de Moneda</a>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link" href="#">Mantenimiento de Países</a>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link" href="#">Mantenimiento de Ciudades</a>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link" href="#">Mantenimiento de Vuelos</a>
-                </li>
-            </ul>
+    <!-- FORMULARIO DE ROLES -->
+    <section class="section">
+        <div class="section__container">
+            <h2 class="section__heading">Mantenimiento de Roles</h2>
+            <form action="/registrarRoles" method="post" class="form" id="usersForm">
+                <fieldset class="form__fieldset">
+                    <div class="form__field">
+                        <label for="descripcion" class="form__label">Descripción del Rol:</label>
+                        <input class="form__input" type="text" name="descripcion" id="descripcion">
+                    </div>
+                </fieldset>
+
+                <button class="form__button" type="submit">Registrar Rol</button>
+            </form>
         </div>
     </section>
+
 
     <!-- FOOTER -->
     <footer class="footer">

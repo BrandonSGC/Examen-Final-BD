@@ -110,6 +110,14 @@ li {
     padding: 2rem 0;
 }
 
+/* Estilos formularios */
+.form {
+    background-color: var(--darkBlue);
+    color: var(--white);
+    padding: 2rem;
+    max-width: 60rem;
+}
+
 .form__fieldset {
     display: flex;
     flex-direction: column;
@@ -243,9 +251,3 @@ li {
 }
 
 /* Mantenimientos Usuarios */
-.usersForm {
-    background-color: var(--darkBlue);
-    color: var(--white);
-    padding: 2rem;
-    max-width: 60rem;
-}
