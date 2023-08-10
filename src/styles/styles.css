@@ -3,9 +3,11 @@
 
 :root {
     --white: #fff;
-    --black: #000;
-    --darkBlue: #05203C;
+    --whiteHover: #b6b6b6;
     --lightBlue:#0c437d;
+    --lightBlueHover:#083868;
+    --darkBlue: #05203C;
+    --black: #000;
 }
 
 html { /* Box Model */
@@ -162,16 +164,57 @@ li {
 }
 
 .form__button:hover {
-    background-color: #083868;
+    background-color: var(--lightBlueHover);
     transition: .3s;
 }
 
 /* Mostrar Vuelos */
-
 .section__heading {
     text-align: center;
 }
 
+.flightCard {
+    background-color: var(--darkBlue);
+    border-radius: 3rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: var(--white);
+    max-width: 80rem;
+    margin: 2rem auto;
+}
+
+.flightCard__field {
+    /* background-color: var(--lightBlue); */
+    padding: 1rem;
+    border-radius: 3rem;
+    width: 30rem;
+    text-align: center;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+.flightCard__field--flight {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.flightCard__image {
+    width: 3rem;
+}
+
+.flightCard__button {
+    background-color: var(--white);
+    color: var(--darkBlue);
+    font-weight: 700;
+}
+.flightCard__button:hover {
+    background-color: var(--whiteHover);
+    color: var(--lightBlue);
+}
 
 
 /* Footer */

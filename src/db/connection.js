@@ -17,6 +17,30 @@ const config = {
     },
 };
 
+// Función para realizar la conexión y realizar una consulta
+async function testDatabaseConnection() {
+    try {
+        // Conectar a la base de datos
+        await sql.connect(config);
+
+        // Realizar una consulta simple (por ejemplo, seleccionar la versión de la base de datos)
+        const result = await sql.query("SELECT @@VERSION AS version");
+
+        // Imprimir los resultados
+        console.log("Conexión exitosa a la base de datos");
+        console.log("Versión de la base de datos:", result.recordset[0].version);
+    } catch (error) {
+        console.error("Error en la conexión a la base de datos:", error.message);
+    } finally {
+        // Cerrar la conexión
+        await sql.close();
+    }
+}
+
+// Llamar a la función para probar la conexión
+// testDatabaseConnection();
+
+
 
 // Functions
 
