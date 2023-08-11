@@ -31,8 +31,11 @@
             <form class="flightForm" action="" method>
                 <fieldset class="form__fieldset">
                     <div class="form__field">
-                        <label class="form__label" for="">Desde:</label>
-                        <input class="form__input" placeholder="Ejemplo: San José" type="text" name="" id="">
+                        <label class="form__label" for="ciudadOrigen">Desde:</label>
+                        <select class="form__input" name="ciudadOrigen" id="ciudadOrigen">
+                            <option value="">-- Seleccione un Ciudad</option>
+                            <!-- Aqui se van a insertar las ciudades que hayan en la base de datos -->
+                        </select>
                     </div>
                     <div class="form__field">
                         <label class="form__label" for="">Fecha de Salida:</label>
@@ -42,8 +45,11 @@
 
                 <fieldset class="form__fieldset">
                     <div class="form__field">
-                        <label class="form__label" for="">Hacia:</label>
-                        <input class="form__input" placeholder="Ejemplo: Cancún" type="text" name="" id="">
+                        <label class="form__label" for="ciudadDestino">Hacia:</label>
+                        <select class="form__input" name="ciudadDestino" id="ciudadDestino">
+                            <option value="">-- Seleccione un Ciudad</option>
+                            <!-- Aqui se van a insertar las ciudades que hayan en la base de datos -->
+                        </select>
                     </div>
                     
                     <div class="form__field">
@@ -57,7 +63,7 @@
                         <label class="form__label" for="">Personas:</label>
                         <input class="form__input" placeholder="Ejemplo: 3" type="number" name="" id="">
                     </div>
-                    <button class="form__button">Buscar</button>
+                    <button id="buscar" class="form__button">Buscar</button>
                 </fieldset>
             </form>
         </div>
@@ -76,12 +82,12 @@
                         </div>
                         <img class="flightCard__image" src="./img/plane.png" alt="Plane">
                         <div class="flightCard__origin">
-                            <h3>Juan Santamaría</h3>
+                            <h3>Benito Juárez International Airport</h3>
                             <p>6:00p.m</p>
                         </div>
                     </div>
                     <div class="flightCard__field flightCard__field--buy">
-                        <h3>Precio: <span>$600</span></h3>
+                        <h3>Tarifa: <span>Económica</span></h3>
                         <button class="form__button flightCard__button">Comprar</button>
                     </div>
                 </div>
@@ -117,5 +123,6 @@
           </div>
         </div>
       </footer>
+      <script type="module" src="./js/app.js"></script>
 </body>
 </html>

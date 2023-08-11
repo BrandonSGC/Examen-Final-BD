@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Importamos las funciones que estabamos exportando desde el archivo de "connection.js".
-const {spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas/* Aqui ponemos los otros nombres de las funciones que ocupemos.*/} = require('../db/connection');
+const {spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas, spObtenerInfoVuelo/* Aqui ponemos los otros nombres de las funciones que ocupemos.*/} = require('../db/connection');
 
 // Absolute Path
 const path = require("path");
@@ -91,6 +91,18 @@ app.get('/ObtenerTiposDeTarifas', async (req, res) => {
         console.log(error);
     }
 });
+
+
+app.get('/ObtenerInfoVuelo', async (req, res) => {
+    try {
+        const infoVuelo = await spObtenerInfoVuelo();
+        JSON.stringify(infoVuelo);
+        res.json(infoVuelo);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 app.post('/registrarUsuario', async (req, res) => {
     try {

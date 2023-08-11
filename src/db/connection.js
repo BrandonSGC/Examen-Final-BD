@@ -182,9 +182,28 @@ async function spRegistrarUsuario(email, contrasena, rolID, identificacion, nomb
   }
 }
 
+async function spObtenerInfoVuelo(aereopuertoOrigenID, aereopuertoDestinoID,fechaSalida) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input("CiudadOrigenID", sql.Int, aereopuertoOrigenID)
+      .input("CiudadDestinoID", sql.Int, aereopuertoDestinoID)
+      .input("FechaSalida", sql.Date, fechaSalida)
+      .execute("VuelosXCiudadesYFecha");
+    if (result.recordset.length > 0) {
+      return result.recordset;
+    }
+    pool.close();
+    return "No se han encontrado vuelos";
+    
+  } catch (err) {
+    console.error("Error executing the stored procedure spObtenerInfoVuelo:", err);
+  }
+}
 
 
-// Aqui ponemos las funciones que vamos a exportar para luego usar estas funciones en el archivo que ocupemos. En este caso el "index.js"
 module.exports = {
   spRegistrarUsuario,
   spObtenerRoles,
@@ -193,5 +212,5 @@ module.exports = {
   spObtenerPaises,
   spObtenerAereopuertos,
   spObtenerTiposDeTarifas,
-  // Aqui solo pone el nombre de la funcion y la coma y ya.
+  spObtenerInfoVuelo,
 };
