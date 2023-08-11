@@ -182,27 +182,28 @@ async function spRegistrarUsuario(email, contrasena, rolID, identificacion, nomb
   }
 }
 
-async function spObtenerInfoVuelo(aereopuertoOrigenID, aereopuertoDestinoID,fechaSalida) {
+
+async function spVuelosXCiudadesYFecha(CiudadOrigenID, CiudadDestinoID, fechaSalida) {
   try {
     const pool = await sql.connect(config);
 
-    await pool
+    const result = await pool
       .request()
-      .input("CiudadOrigenID", sql.Int, aereopuertoOrigenID)
-      .input("CiudadDestinoID", sql.Int, aereopuertoDestinoID)
-      .input("FechaSalida", sql.Date, fechaSalida)
+      .input('CiudadOrigenID', sql.Int, CiudadOrigenID)
+      .input('CiudadDestinoID', sql.Int, CiudadDestinoID)
+      .input('fechaSalida', sql.Date, fechaSalida)
       .execute("VuelosXCiudadesYFecha");
+
     if (result.recordset.length > 0) {
+      pool.close();
       return result.recordset;
+    } else {
+      return 'No se han encontrado Vuelos.';
     }
-    pool.close();
-    return "No se han encontrado vuelos";
-    
-  } catch (err) {
-    console.error("Error executing the stored procedure spObtenerInfoVuelo:", err);
+  } catch {
+    console.error("Error al obtener los Vuelos.");
   }
 }
-
 
 module.exports = {
   spRegistrarUsuario,
@@ -212,5 +213,5 @@ module.exports = {
   spObtenerPaises,
   spObtenerAereopuertos,
   spObtenerTiposDeTarifas,
-  spObtenerInfoVuelo,
+  spVuelosXCiudadesYFecha,
 };

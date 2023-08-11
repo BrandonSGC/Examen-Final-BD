@@ -99,6 +99,7 @@ li {
 .main {
     background-color: var(--darkBlue);
     color: var(--white);
+    padding-bottom: 2rem;
 }
 
 .main__heading {
@@ -120,11 +121,6 @@ li {
     max-width: 60rem;
     margin: 0 auto;
 }
-
-/* #usersForm {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-} */
 
 .form__fieldset {
     display: flex;
@@ -166,6 +162,19 @@ li {
 .form__button:hover {
     background-color: var(--lightBlueHover);
     transition: .3s;
+}
+
+/* Alertas */
+.alert {
+    background-color: #bdb322;
+    color: var(--black);
+    text-align: center;
+    width: 30rem;
+    padding: 1rem;
+    font-weight: 700;
+    margin: 0rem auto;
+    border-radius: .3rem;
+    margin-top: .1rem;
 }
 
 /* Mostrar Vuelos */
