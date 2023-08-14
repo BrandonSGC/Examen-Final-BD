@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Importamos las funciones que estabamos exportando desde el archivo de "connection.js".
-const { spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas, spVuelosXCiudadesYFecha, insertarRolAsync, insertarPermisoAsync, insertarTipoTarifa, insertarTarifaAsync, insertarMonedaAsync, insertarPaisAsync, insertarCiudadAsync, insertarAeropuertoAsync, configurarRolPermiso } = require('../db/connection');
+const { spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas, spVuelosXCiudadesYFecha, insertarRolAsync, insertarPermisoAsync, insertarTipoTarifa, insertarTarifaAsync, insertarMonedaAsync, insertarPaisAsync, insertarCiudadAsync, insertarAeropuertoAsync, configurarRolPermiso, insertarNuevoVuelo } = require('../db/connection');
 
 // Absolute Path
 const path = require("path");
@@ -198,5 +198,20 @@ app.post('/registrarAereopuerto', async (req, res) => {
         res.send('Aeropuerto registrado con éxito!');
     } catch (error) {
         res.send(`Se ha producido un error al registrar el aeropuerto. ${error}`);
+    }
+});
+
+
+app.post('/registrarVuelo', async (req, res) => {
+    try {
+        const { origen, destino, fechaVuelo, horaSalida, horaLlegada, tarifas } = req.body;
+
+        console.log(origen, destino, fechaVuelo, horaSalida, horaLlegada, tarifas)
+
+        await insertarNuevoVuelo(origen, destino, fechaVuelo, horaSalida, horaLlegada, tarifas);
+
+        res.send('Vuelo registrado con éxito!');
+    } catch (error) {
+        res.send(`Se ha producido un error al registrar el Vuelo. ${error}`);
     }
 });

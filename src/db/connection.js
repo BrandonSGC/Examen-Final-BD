@@ -347,6 +347,29 @@ async function insertarAeropuertoAsync(nombreAeropuerto, ciudadID) {
   }
 }
 
+async function insertarNuevoVuelo(origen, destino, fechaVuelo, horaSalida, horaLlegada, tipoTarifa) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input("IdAereopuertoOrigen", sql.Int, origen)
+      .input("IdAereopuertoDestino", sql.Int, destino)
+      .input("FechaVuelo", sql.Date, fechaVuelo)
+      .input("HoraSalida", horaSalida)
+      .input("HoraLlegada", horaLlegada)
+      .input("IdTipoTarifa", sql.Int, tipoTarifa)
+      .execute("CreaNuevoVuelo");
+    
+    console.log('Nuevo vuelo creado correctamente!')
+
+    pool.close();
+  } catch (err) {
+    console.error("Error al crear el vuelo:", err);
+  }
+}
+
+
 
 async function spVuelosXCiudadesYFecha(CiudadOrigenID, CiudadDestinoID, fechaSalida) {
   try {
@@ -388,5 +411,6 @@ module.exports = {
   insertarCiudadAsync,
   insertarAeropuertoAsync,
   configurarRolPermiso,
+  insertarNuevoVuelo,
   
 };
