@@ -158,6 +158,7 @@ async function spObtenerTiposDeTarifas() {
   }
 }
 
+// Inserts
 async function spRegistrarUsuario(email, contrasena, rolID, identificacion, nombre, apellido, fechaNacimiento, telefono) {
   try {
     const pool = await sql.connect(config);
@@ -179,6 +180,170 @@ async function spRegistrarUsuario(email, contrasena, rolID, identificacion, nomb
     pool.close();
   } catch (err) {
     console.error("Error executing the stored procedure spRegistrarUsuario:", err);
+  }
+}
+
+// Inserts Yeison:
+
+
+async function insertarRolAsync(descripcionRol) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input("Descripción_del_rol", sql.VarChar(100), descripcionRol)
+      .execute("InsertarRol");
+    
+    console.log('Rol insertado correctamente!')
+
+    pool.close();
+  } catch (err) {
+    console.error("Error al insertar el rol:", err);
+  }
+}
+
+async function insertarPermisoAsync(descripcionPermiso) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input("Descripción_del_permiso", sql.VarChar(100), descripcionPermiso)
+      .execute("InsertarPermiso");
+    
+    console.log('Permiso insertado correctamente!')
+
+    pool.close();
+  } catch (err) {
+    console.error("Error al insertar el permiso:", err);
+  }
+}
+
+async function configurarRolPermiso(rolID, permisoID) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input("RolID", sql.Int, rolID)
+      .input("PermisoID", sql.Int, permisoID)
+      .execute("ConfigurarRolesPermisos");
+    
+    console.log('Configuracion realizada correctamente!')
+
+    pool.close();
+  } catch (err) {
+    console.error("Error al configurar el rol - permiso:", err);
+  }
+}
+
+async function insertarTipoTarifa(descripcionTipoTarifa) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input("Descripción", sql.VarChar(100), descripcionTipoTarifa)
+      .execute("InsertarTipoTarifa");
+    
+    console.log('Tipo de Tarifa insertado correctamente!')
+
+    pool.close();
+  } catch (err) {
+    console.error("Error al insertar el Tipo de Tarifa:", err);
+  }
+}
+
+// Falta hacer el formulario de esta.
+async function insertarTarifaAsync(vueloID, tipoTarifaID, precio) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input("VueloID", sql.Int, vueloID)
+      .input("TipoTarifaID", sql.Int, tipoTarifaID)
+      .input("Precio", sql.Decimal(10, 2), precio)
+      .execute("InsertarTarifa");
+    
+    console.log('Tarifa insertada correctamente!')
+
+    pool.close();
+  } catch (err) {
+    console.error("Error al insertar la tarifa:", err);
+  }
+}
+
+
+async function insertarMonedaAsync(nombre, valor) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input("Nombre", sql.VarChar(30), nombre)
+      .input("Valor", sql.Decimal(10, 2), valor)
+      .execute("InsertarMoneda");
+    
+    console.log('Moneda insertada correctamente!')
+
+    pool.close();
+  } catch (err) {
+    console.error("Error al insertar la moneda:", err);
+  }
+}
+
+async function insertarPaisAsync(nombrePais) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input("Nombre_del_país", sql.VarChar(100), nombrePais)
+      .execute("InsertarPais");
+    
+    console.log('País insertado correctamente!')
+
+    pool.close();
+  } catch (err) {
+    console.error("Error al insertar el país:", err);
+  }
+}
+
+async function insertarCiudadAsync(nombreCiudad, paisID) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input("Nombre_de_la_ciudad", sql.VarChar(100), nombreCiudad)
+      .input("PaisID", sql.Int, paisID)
+      .execute("InsertarCiudad");
+    
+    console.log('Ciudad insertada correctamente!')
+
+    pool.close();
+  } catch (err) {
+    console.error("Error al insertar la ciudad:", err);
+  }
+}
+
+async function insertarAeropuertoAsync(nombreAeropuerto, ciudadID) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input("Nombre_del_aeropuerto", sql.VarChar(100), nombreAeropuerto)
+      .input("CiudadID", sql.Int, ciudadID)
+      .execute("InsertarAeropuerto");
+    
+    console.log('Aeropuerto insertado correctamente!')
+
+    pool.close();
+  } catch (err) {
+    console.error("Error al insertar el aeropuerto:", err);
   }
 }
 
@@ -214,4 +379,14 @@ module.exports = {
   spObtenerAereopuertos,
   spObtenerTiposDeTarifas,
   spVuelosXCiudadesYFecha,
+  insertarRolAsync,
+  insertarPermisoAsync,
+  insertarTarifaAsync,
+  insertarTipoTarifa,
+  insertarMonedaAsync,
+  insertarPaisAsync,
+  insertarCiudadAsync,
+  insertarAeropuertoAsync,
+  configurarRolPermiso,
+  
 };

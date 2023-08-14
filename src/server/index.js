@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Importamos las funciones que estabamos exportando desde el archivo de "connection.js".
-const {spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas, spVuelosXCiudadesYFecha/* Aqui ponemos los otros nombres de las funciones que ocupemos.*/} = require('../db/connection');
+const { spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas, spVuelosXCiudadesYFecha, insertarRolAsync, insertarPermisoAsync, insertarTipoTarifa, insertarTarifaAsync, insertarMonedaAsync, insertarPaisAsync, insertarCiudadAsync, insertarAeropuertoAsync, configurarRolPermiso } = require('../db/connection');
 
 // Absolute Path
 const path = require("path");
@@ -95,7 +95,6 @@ app.get('/ObtenerTiposDeTarifas', async (req, res) => {
 
 app.post('/ObtenerVuelos', async (req, res) => {
     const { ciudadOrigen, ciudadDestino, fechaSalida} = req.body;
-    console.log (ciudadOrigen, ciudadDestino, fechaSalida)
     try {
         const vuelos = await spVuelosXCiudadesYFecha(ciudadOrigen, ciudadDestino, fechaSalida);
         JSON.stringify(vuelos);
@@ -111,21 +110,93 @@ app.post('/registrarUsuario', async (req, res) => {
         // Obtenemos los datos que envia el formulario.
         const { nombre, apellido, identificacion, email, contrasena, telefono, fechaNacimiento, rol} = req.body;
 
-        // Imprimo los datos para verificar que esten correctos.
-        console.log(nombre);
-        console.log(apellido);
-        console.log(identificacion);
-        console.log(email);
-        console.log(contrasena);
-        console.log(telefono);
-        console.log(fechaNacimiento);
-        console.log(rol);
-
-        // Llamamos la funcion del archivo "connection.js" para ejecutar el prpocedimiento almacenado (Registrar Usuario).
         await spRegistrarUsuario(email, contrasena, rol, identificacion, nombre, apellido, fechaNacimiento, telefono);
         res.send('Usuario registrado con éxito!');
 
     } catch (error) {
         res.send(`Se ha producido un error al registrar el usuario. ${error}`);
+    }
+});
+
+
+app.post('/registrarRoles', async (req, res) => {
+    try {
+        const { descripcion } = req.body;
+        await insertarRolAsync(descripcion);
+        res.send('Rol registrado con éxito!');
+    } catch (error) {
+        res.send(`Se ha producido un error al registrar el rol. ${error}`);
+    }
+});
+
+app.post('/registrarPermiso', async (req, res) => {
+    try {
+        const { descripcion } = req.body;
+        await insertarPermisoAsync(descripcion);
+        res.send('Permiso registrado con éxito!');
+    } catch (error) {
+        res.send(`Se ha producido un error al registrar el permiso. ${error}`);
+    }
+});
+
+app.post('/configurarRolPermiso', async (req, res) => {
+    try {
+        const { rol, permiso } = req.body;
+        await configurarRolPermiso(rol, permiso);
+        res.send('Configuración realizada con éxito!');
+    } catch (error) {
+        res.send(`Se ha producido un error en la configuración. ${error}`);
+    }
+});
+
+app.post('/registrarTipoTarifa', async (req, res) => {
+    try {
+        const { descripcion } = req.body;
+        await insertarTipoTarifa(descripcion);
+        res.send('Tipo de tarifa registrado con éxito!');
+    } catch (error) {
+        res.send(`Se ha producido un error al registrar el Tipo de tarifa. ${error}`);
+    }
+});
+
+app.post('/registrarMoneda', async (req, res) => {
+    try {
+        const { nombre, valor } = req.body;
+        await insertarMonedaAsync(nombre, valor);
+        res.send('Moneda registrada con éxito!');
+    } catch (error) {
+        res.send(`Se ha producido un error al registrar la moneda. ${error}`);
+    }
+});
+
+app.post('/registrarPais', async (req, res) => {
+    try {
+        const { descripcion } = req.body;
+        await insertarPaisAsync(descripcion);
+        res.send('País registrado con éxito!');
+    } catch (error) {
+        res.send(`Se ha producido un error al registrar el país. ${error}`);
+    }
+});
+
+
+app.post('/registrarCiudad', async (req, res) => {
+    try {
+        const { descripcion, pais } = req.body;
+        await insertarCiudadAsync(descripcion, pais);
+        res.send('Ciudad registrada con éxito!');
+    } catch (error) {
+        res.send(`Se ha producido un error al registrar la ciudad. ${error}`);
+    }
+});
+
+
+app.post('/registrarAereopuerto', async (req, res) => {
+    try {
+        const { nombre, ciudad } = req.body;
+        await insertarAeropuertoAsync(nombre, ciudad);
+        res.send('Aeropuerto registrado con éxito!');
+    } catch (error) {
+        res.send(`Se ha producido un error al registrar el aeropuerto. ${error}`);
     }
 });
