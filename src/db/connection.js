@@ -370,30 +370,6 @@ async function insertarNuevoVuelo(origen, destino, fechaVuelo, horaSalida, horaL
 }
 
 
-
-async function spVuelosXCiudadesYFecha(CiudadOrigenID, CiudadDestinoID, fechaSalida) {
-  try {
-    const pool = await sql.connect(config);
-
-    const result = await pool
-      .request()
-      .input('CiudadOrigenID', sql.Int, CiudadOrigenID)
-      .input('CiudadDestinoID', sql.Int, CiudadDestinoID)
-      .input('fechaSalida', sql.Date, fechaSalida)
-      .execute("VuelosXCiudadesYFecha");
-
-    if (result.recordset.length > 0) {
-      pool.close();
-      return result.recordset;
-    } else {
-      return false;
-    }
-  } catch {
-    console.error("Error al obtener los Vuelos.");
-  }
-}
-
-
 async function spObtenerInfoVuelos(CiudadOrigenID, CiudadDestinoID, fechaSalida, TipoTarifaID) {
   try {
     const pool = await sql.connect(config);
@@ -426,7 +402,6 @@ module.exports = {
   spObtenerPaises,
   spObtenerAereopuertos,
   spObtenerTiposDeTarifas,
-  spVuelosXCiudadesYFecha,
   insertarRolAsync,
   insertarPermisoAsync,
   insertarTarifaAsync,
