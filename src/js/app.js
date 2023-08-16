@@ -14,20 +14,28 @@ function buscarVuelo(evt) {
     evt.preventDefault();
     
     // Limpiar html
-
+    limpiarHTML();
 
     if (validarFormulario()) {
         obtenerVuelos();
     } else {
-        const container = document.querySelector('.main__container');
-        const p = document.createElement('p');
-        p.className = 'alert';
-        p.textContent = 'Por favor complete los campos.';
-        container.appendChild(p);
-        setTimeout( () => {
-            container.removeChild(p);
-        }, 3000)
+        alert('Por favor complete los campos.');
     }
+}
+
+function limpiarHTML() {
+
+}
+
+function alert(message) {
+    const container = document.querySelector('.main__container');;
+    const p = document.createElement('p');
+    p.className = 'alert';
+    p.textContent = message;
+    container.appendChild(p);
+    setTimeout( () => {
+        container.removeChild(p);
+    }, 3000)
 }
 
 
@@ -90,32 +98,37 @@ function obtenerVuelos() {
     })
         .then(datos => datos.json())
         .then(vuelos => {
-            vuelos.forEach(vuelo => {
-                const {VueloID, AeropuertoOrigen, AeropuertoDestino, FechaVuelo, HoraSalida, HoraLlegada, DescripcionTipoTarifa} = vuelo;
-                console.log(`VueloID: ${VueloID}\nAeropuertoOrigen: ${AeropuertoOrigen}\nAeropuertoDestino ${AeropuertoDestino}\nFechaVuelo: ${FechaVuelo}\nHoraSalida ${HoraSalida}\nHoraLlegada ${HoraLlegada}\nTarifa: ${DescripcionTipoTarifa}`);
-
-                const vuelos = document.querySelector('#vuelos');
-                const flightCard = document.createElement('div')
-                flightCard.className = 'flightCard';
-                flightCard.innerHTML = `
-                <div class="flightCard__field flightCard__field--flight">
-                    <div class="flightCard__origin">
-                        <h3>${AeropuertoOrigen}</h3>
-                        <p>${HoraSalida}</p>
+            if (vuelos.message === "No se encontraron vuelos") {
+                alert('No se encontraron vuelos...');
+            } else {
+                vuelos.forEach(vuelo => {
+                    const {VueloID, AeropuertoOrigen, AeropuertoDestino, FechaVuelo, HoraSalida, HoraLlegada, DescripcionTipoTarifa} = vuelo;
+                    console.log(`VueloID: ${VueloID}\nAeropuertoOrigen: ${AeropuertoOrigen}\nAeropuertoDestino ${AeropuertoDestino}\nFechaVuelo: ${FechaVuelo}\nHoraSalida ${HoraSalida}\nHoraLlegada ${HoraLlegada}\nTarifa: ${DescripcionTipoTarifa}`);
+    
+                    const vuelos = document.querySelector('#vuelos');
+                    const flightCard = document.createElement('div')
+                    flightCard.className = 'flightCard';
+                    flightCard.innerHTML = `
+                    <div class="flightCard__field flightCard__field--flight">
+                        <div class="flightCard__origin">
+                            <h3>${AeropuertoOrigen}</h3>
+                            <p>${HoraSalida}</p>
+                        </div>
+                        <img class="flightCard__image" src="./img/plane.png" alt="Plane">
+                        <div class="flightCard__origin">
+                            <h3>${AeropuertoDestino}</h3>
+                            <p>${HoraLlegada}</p>
+                        </div>
                     </div>
-                    <img class="flightCard__image" src="./img/plane.png" alt="Plane">
-                    <div class="flightCard__origin">
-                        <h3>${AeropuertoDestino}</h3>
-                        <p>${HoraLlegada}</p>
+                    <div class="flightCard__field flightCard__field--buy">
+                        <h3>Tarifa: <span>${DescripcionTipoTarifa}</span></h3>
+                        <button class="form__button flightCard__button">Comprar</button>
                     </div>
-                </div>
-                <div class="flightCard__field flightCard__field--buy">
-                    <h3>Tarifa: <span>${DescripcionTipoTarifa}</span></h3>
-                    <button class="form__button flightCard__button">Comprar</button>
-                </div>
-                `
-                vuelos.appendChild(flightCard);
-            });
+                    `
+                    vuelos.appendChild(flightCard);
+                });
+            }
+            
         })
         .catch( (error) => console.error(error))
 }

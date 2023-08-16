@@ -386,7 +386,7 @@ async function spVuelosXCiudadesYFecha(CiudadOrigenID, CiudadDestinoID, fechaSal
       pool.close();
       return result.recordset;
     } else {
-      return 'No se han encontrado Vuelos.';
+      return false;
     }
   } catch {
     console.error("Error al obtener los Vuelos.");

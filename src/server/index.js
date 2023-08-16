@@ -97,8 +97,12 @@ app.post('/ObtenerVuelos', async (req, res) => {
     const { ciudadOrigen, ciudadDestino, fechaSalida} = req.body;
     try {
         const vuelos = await spVuelosXCiudadesYFecha(ciudadOrigen, ciudadDestino, fechaSalida);
-        JSON.stringify(vuelos);
-        res.json(vuelos);
+        if (vuelos === false) {
+            res.json({message: 'No se encontraron vuelos'});
+        } else {
+            JSON.stringify(vuelos);
+            res.json(vuelos);
+        }
     } catch (error) {
         console.log(error);
     }
