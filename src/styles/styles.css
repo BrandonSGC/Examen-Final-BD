@@ -113,6 +113,13 @@ li {
     padding: 2rem 0;
 }
 
+#buscar {
+    margin-top: 2rem;
+    grid-column: 2 / 3;
+}
+
+
+
 /* Estilos formularios */
 .form {
     background-color: var(--darkBlue);
@@ -187,10 +194,10 @@ li {
     border-radius: 3rem;
     padding: 2rem;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
+    gap: 5rem;
     color: var(--white);
-    max-width: 80rem;
     margin: 2rem auto;
 }
 
@@ -225,6 +232,9 @@ li {
     color: var(--lightBlue);
 }
 
+.flightCard {
+    font-weight: 700;
+}
 
 /* Footer */
 

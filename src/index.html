@@ -34,7 +34,6 @@
                         <label class="form__label" for="ciudadOrigen">Desde:</label>
                         <select class="form__input" name="ciudadOrigen" id="ciudadOrigen" required>
                             <option value="">-- Seleccione un Ciudad</option>
-                            <!-- Aqui se van a insertar las ciudades que hayan en la base de datos -->
                         </select>
                     </div>
                     <div class="form__field">
@@ -48,23 +47,30 @@
                         <label class="form__label" for="ciudadDestino">Hacia:</label>
                         <select class="form__input" name="ciudadDestino" id="ciudadDestino" required>
                             <option value="">-- Seleccione un Ciudad</option>
-                            <!-- Aqui se van a insertar las ciudades que hayan en la base de datos -->
                         </select>
                     </div>
                     
                     <div class="form__field">
-                        <label class="form__label" for="">Fecha de Regreso:</label>
-                        <input class="form__input" type="date" name="" id="">
+                        <label class="form__label">Fecha de Regreso:</label>
+                        <input class="form__input" type="date">
                     </div>
                 </fieldset>
 
                 <fieldset class="form__fieldset form__fieldset-btn">
                     <div class="form__field">
-                        <label class="form__label" for="">Personas:</label>
-                        <input class="form__input" placeholder="Ejemplo: 3" type="number" name="" id="">
+                        <label class="form__label" for="personas">Personas:</label>
+                        <input class="form__input" placeholder="Ejemplo: 3" type="number" name="personas" id="personas">
                     </div>
-                    <button id="buscar" class="form__button">Buscar</button>
+
+                    <div class="form__field">
+                        <label class="form__label" for="tarifas">Tipo de Tarifa:</label>
+                        <select class="form__input" name="tarifas" id="tarifas" required>
+                            <option value="">-- Seleccione Tipo de Tarifa</option>
+                        </select>
+                    </div>
+                    
                 </fieldset>
+                <button id="buscar" class="form__button">Buscar Vuelos</button>
             </form>
             <!-- Aqui se va a insertar la alerta: <p class="alert">Debe de completar los campos...</p> -->
         </div>
@@ -89,6 +95,7 @@
                     </div>
                     <div class="flightCard__field flightCard__field--buy">
                         <h3>Tarifa: <span>Económica</span></h3>
+                        <p class="flightCard__price"><span id="price">$</span>800</p>
                         <button class="form__button flightCard__button">Comprar</button>
                     </div>
                 </div> -->
