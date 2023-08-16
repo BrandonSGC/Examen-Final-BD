@@ -152,7 +152,7 @@ function mostrarVuelos(vuelos) {
             <h3>Tarifa: <span>${DescripcionTipoTarifa}</span></h3>
             <p class="flightCard__price"><span id="price">Cantidad de boletos: </span>${cantPersonas}</p>
             <p class="flightCard__price"><span id="price">Total a pagar: $</span>${Precio * cantPersonas}</p>
-            <button class="form__button flightCard__button">Comprar</button>
+            <a href="../completarCompra.html" class="form__button flightCard__button">Comprar</a>
         </div>
         `
         vuelos.appendChild(flightCard);

@@ -10,6 +10,7 @@ const config = {
     user: "sa",
     password: "root",
     server: "localhost",
+    // port: 19630,
     database: "ExamenFinalBD",
     options: {
       encrypt: true,

@@ -31,6 +31,10 @@ body {
         width: 90%;
     }
 }
+[class$='heading'] {
+    text-align: center;
+}
+
 img {
     max-width: 100%;
     display: block;
@@ -129,6 +133,11 @@ li {
     margin: 0 auto;
 }
 
+.purchaseForm {
+    /* display: flex;
+    flex-direction: column; */
+}
+
 .form__fieldset {
     display: flex;
     flex-direction: column;
@@ -137,6 +146,13 @@ li {
 
 .form__fieldset-btn {
     justify-content: space-between;
+}
+
+.form__fieldset--purchase {
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    
 }
 
 .form__field {

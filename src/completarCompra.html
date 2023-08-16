@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>Completar Compra</title>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header__container">
+            <div class="header__display">
+                <a href="index.html" class="header__logo">
+                    <h1>LOGO</h1>
+                </a>
+                <nav class="navigation">
+                    <a href="#" class="navigation__link">Iniciar Sesión</a>
+                    <a href="#" class="navigation__link">Vuelos</a>
+                    <a href="./configuracion.html" class="navigation__link">Configuración</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="purchase">
+        <div class="purchase__container">
+            <h2 class="purchase__heading">Completar Compra</h2>
+            <form action="/pagar" class="form purchaseForm">
+                <fieldset class="form__fieldset">
+                    <div class="form__field">
+                        <label for="nombreCompleto" class="form__label">Nombre Completo:</label>
+                        <input class="form__input" type="text" name="nombreCompleto" id="nombreCompleto" disabled>
+                    </div>
+                    <div class="form__field">
+                        <label for="tarjeta" class="form__label">Número de Tarjeta:</label>
+                        <input class="form__input" type="text" name="tarjeta" id="tarjeta" placeholder="Ejemplo 4444 4444 4444 4444">
+                    </div>
+                </fieldset>
+                <fieldset class="form__fieldset form__fieldset--purchase">
+                    <div class="form__field">
+                        <label for="fechaVencimiento" class="form__label">Fecha de Vencimiento:</label>
+                        <input class="form__input form__input--purchase" type="text" name="fechaVencimiento" id="fechaVencimiento" placeholder="Ejemplo: 03/23">
+                    </div>
+                    <div class="form__field">
+                        <label for="codigo" class="form__label">Código:</label>
+                        <input class="form__input form__input--purchase" type="password" name="codigo" id="codigo">
+                    </div>
+                </fieldset>
+                <button class="form__button" type="submit">Realizar Compra</button>
+            </form>
+        </div>
+    </main>
+
+
+
+    <footer class="footer">
+        <header class="footer__header">
+          <h3 class="footer__heading">Administración de Bases de Datos.</h3>
+        </header>
+        
+        <div class="footer__container">
+          <div class="footer__display">          
+            <div class="footer__column">
+              <h4 class="">Universidad:</h4>
+              <img class="cuc" src="./img/CUC.png" alt="CUC logo">
+              <a href="https://www.cuc.ac.cr/" target="_blank">Colegio Universitario de Cartago</a>
+            </div>
+  
+            <div class="footer__column">
+              <h4>Estudiantes:</h4>
+              <p>Brandon Gomez Carvajal</p>
+              <p>Mario Araya Fuentes</p>
+              <p>Yeison Hernandez Sanabria</p>
+              <p>Ana Najera Gomez</p>
+            </div>
+  
+            <div class="footer__column">
+              <h4>Acerca de:</h4>
+              <p>En este proyecto se han utilizado las tecnologías de HTML, CSS, Javascript, NodeJS, Express, SQL Server para el Examen Final de la materia Administración de Bases de Datos.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <script type="module" src="./js/app.js"></script>
+</body>
+</html>
