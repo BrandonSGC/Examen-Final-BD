@@ -147,8 +147,6 @@ li {
 .form__fieldset--purchase {
     display: flex;
     flex-direction: row;
-    gap: 5rem;
-    
 }
 
 .form__field {
@@ -168,6 +166,10 @@ li {
     /* width: 70%; */
 }
 
+#codigo {
+    width: 10rem;
+}
+
 .form__button {
     border: none;
     padding: 1rem;
@@ -176,7 +178,7 @@ li {
     background-color: var(--lightBlue);
     color: var(--white);
     border-radius: .3rem;
-    margin: 0 auto;
+    margin: 1rem auto;
     display: block;
 }
 
