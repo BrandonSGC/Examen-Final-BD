@@ -27,7 +27,7 @@
     <main class="purchase">
         <div class="purchase__container">
             <h2 class="purchase__heading">Completar Compra</h2>
-            <form action="/pagar" class="form purchaseForm">
+            <form action="/pagar" method="post" class="form purchaseForm">
                 <fieldset class="form__fieldset">
                     <div class="form__field">
                         <label for="nombreCompleto" class="form__label">Nombre Completo:</label>
@@ -35,21 +35,21 @@
                     </div>
                     <div class="form__field">
                         <label for="tarjeta" class="form__label">Número de Tarjeta:</label>
-                        <input class="form__input" type="text" name="tarjeta" id="tarjeta" placeholder="Ejemplo 4444 4444 4444 4444">
+                        <input class="form__input" type="text" name="tarjeta" id="tarjeta" placeholder="Ejemplo 4444 4444 4444 4444" required>
                     </div>
                 </fieldset>
                 <fieldset class="form__fieldset form__fieldset--purchase">
                     <div class="form__field">
                         <label for="fechaVencimiento" class="form__label">Fecha de Vencimiento:</label>
-                        <input class="form__input form__input--purchase" type="text" name="fechaVencimiento" id="fechaVencimiento" placeholder="Ejemplo: 03/23">
+                        <input class="form__input form__input--purchase" type="text" name="fechaVencimiento" id="fechaVencimiento" placeholder="Ejemplo: 03/23" required>
                     </div>
                     <div class="form__field">
                         <label for="codigo" class="form__label">Código:</label>
-                        <input class="form__input form__input--purchase" type="password" name="codigo" id="codigo">
+                        <input class="form__input form__input--purchase" type="password" name="codigo" id="codigo" required>
                     </div>
                 </fieldset>
                 <!-- <p class="alert">Alerta</p> -->
-                <button class="form__button" type="submit">Realizar Compra</button>
+                <button id="btnRelizarCompra" class="form__button" type="submit">Realizar Compra</button>
             </form>
         </div>
     </main>
@@ -84,6 +84,6 @@
           </div>
         </div>
       </footer>
-      <script type="module" src="./js/app.js"></script>
+      <script type="module" src="./js/completarCompra.js"></script>
 </body>
 </html>

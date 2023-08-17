@@ -122,11 +122,6 @@ function obtenerVuelos() {
 function mostrarVuelos(vuelos) {
     vuelos.forEach(vuelo => {
         console.log(vuelo);
-        // Convert object to save it in local storage.
-        let infoVuelo = JSON.stringify(vuelo);
-
-        // Save the json in local storage
-        localStorage.setItem('infoVuelo', infoVuelo);
 
         const {VueloID, AeropuertoOrigen, AeropuertoDestino, FechaVuelo, HoraSalida, HoraLlegada, DescripcionTipoTarifa, Precio, DetallesAereolinea, DuracionVuelo} = vuelo;
 
@@ -134,6 +129,13 @@ function mostrarVuelos(vuelos) {
         const flightCard = document.createElement('div')
 
         const cantPersonas = parseInt(document.getElementById("personas").value);
+
+        vuelo.cantidadPersonas = cantPersonas;
+        // Convert object to save it in local storage.
+        let infoVuelo = JSON.stringify(vuelo);
+
+        // Save the json in local storage
+        localStorage.setItem('infoVuelo', infoVuelo);
 
         flightCard.className = 'flightCard';
         flightCard.innerHTML = `

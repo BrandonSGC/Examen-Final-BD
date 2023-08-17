@@ -219,3 +219,22 @@ app.post('/registrarVuelo', async (req, res) => {
         res.send(`Se ha producido un error al registrar el Vuelo. ${error}`);
     }
 });
+
+
+app.post('/pagar', async(req, res) => {
+    try {
+        let { tarjeta, fechaVencimiento, codigo, infoVuelo } = req.body;
+        tarjeta = tarjeta.replace(/\s/g, '');
+
+        const {VueloID, AeropuertoOrigen, AeropuertoDestino, FechaVuelo, HoraSalida, HoraLlegada, DescripcionTipoTarifa, Precio, DetallesAerolinea, DuracionVuelo, cantidadPersonas} = infoVuelo;
+
+        // Precio Total:
+        let total = Precio * cantidadPersonas;
+
+        console.log(`El total a pagar es: ${total}`);
+
+        //
+    } catch (error) {
+        console.log(error);
+    }
+});
