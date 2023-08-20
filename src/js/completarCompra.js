@@ -53,7 +53,11 @@ function comprar(evt) {
 
 
 function cargarUserInfo() {
-    const { Nombre, Apellido} = userInfo
+    const { Nombre, Apellido} = userInfo;
+    const { Precio, cantidadPersonas} = infoVuelo;
     const userName = document.querySelector('#nombreCompleto');
     userName.textContent = `${Nombre} ${Apellido}`;
+
+    const total = document.querySelector('#total')
+    total.textContent = cantidadPersonas * Precio;
 }
