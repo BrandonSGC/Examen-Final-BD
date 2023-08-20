@@ -27,7 +27,8 @@ function comprar(evt) {
         tarjeta,
         fechaVencimiento,
         codigo,
-        infoVuelo: infoVuelo
+        infoVuelo: infoVuelo,
+        userInfo,
     };
 
     fetch('/pagar', {
@@ -52,7 +53,7 @@ function comprar(evt) {
 
 
 function cargarUserInfo() {
-    const {nombre, apellidos} = userInfo
+    const { Nombre, Apellido} = userInfo
     const userName = document.querySelector('#nombreCompleto');
-    userName.value = `${nombre} ${apellidos}`;
+    userName.textContent = `${Nombre} ${Apellido}`;
 }
