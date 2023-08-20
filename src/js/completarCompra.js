@@ -2,9 +2,14 @@
 const infoVuelo = JSON.parse(localStorage.getItem('infoVuelo'));
 const btnRealizarCompra = document.querySelector('#btnRelizarCompra')
 
+// Obtener info del usuario
+const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+console.log(userInfo);
+
 
 // Events
 document.addEventListener('DOMContentLoaded', () => {
+    cargarUserInfo();
     console.log(infoVuelo);
     btnRealizarCompra.addEventListener('click', comprar);
 });
@@ -43,4 +48,11 @@ function comprar(evt) {
             
         })
         .catch( (error) => console.error(error))
+}
+
+
+function cargarUserInfo() {
+    const {nombre, apellidos} = userInfo
+    const userName = document.querySelector('#nombreCompleto');
+    userName.value = `${nombre} ${apellidos}`;
 }

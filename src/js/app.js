@@ -3,6 +3,7 @@ import { ObtenerTiposDeTarifas } from "./tiposTarifas.js";
 // Variables
 const btnBuscar = document.querySelector('#buscar');
 const vuelosContainer = document.querySelector('#vuelos');
+const loginState = JSON.parse(localStorage.getItem('loginState'));
 
 
 // Events
@@ -18,12 +19,20 @@ function buscarVuelo(evt) {
     evt.preventDefault();
 
     limpiarHTML();
-
-    if (validarFormulario()) {
-        obtenerVuelos();
+    
+    // Validar que haya iniciado sesion antes de buscar vuelos...    
+    if (loginState) {
+        if (validarFormulario()) {
+            obtenerVuelos();
+            
+        } else {
+            alert('Por favor complete los campos.');
+        }
     } else {
-        alert('Por favor complete los campos.');
+        alert('Debes de iniciar sesion antes de buscar vuelos...');
     }
+
+    
 }
 
 function limpiarHTML() {
@@ -123,7 +132,7 @@ function mostrarVuelos(vuelos) {
     vuelos.forEach(vuelo => {
         console.log(vuelo);
 
-        const {VueloID, AeropuertoOrigen, AeropuertoDestino, FechaVuelo, HoraSalida, HoraLlegada, DescripcionTipoTarifa, Precio, DetallesAereolinea, DuracionVuelo} = vuelo;
+        const {VueloID, AeropuertoOrigen, AeropuertoDestino, FechaVuelo, HoraSalida, HoraLlegada, DescripcionTipoTarifa, Precio } = vuelo;
 
         const vuelos = document.querySelector('#vuelos');
         const flightCard = document.createElement('div')

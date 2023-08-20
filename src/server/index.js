@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Importamos las funciones que estabamos exportando desde el archivo de "connection.js".
-const { spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas, insertarRolAsync, insertarPermisoAsync, insertarTipoTarifa, insertarTarifaAsync, insertarMonedaAsync, insertarPaisAsync, insertarCiudadAsync, insertarAeropuertoAsync, configurarRolPermiso, insertarNuevoVuelo, spObtenerInfoVuelos } = require('../db/connection');
+const { spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas, insertarRolAsync, insertarPermisoAsync, insertarTipoTarifa, insertarTarifaAsync, insertarMonedaAsync, insertarPaisAsync, insertarCiudadAsync, insertarAeropuertoAsync, configurarRolPermiso, insertarNuevoVuelo, spObtenerInfoVuelos, spLogin } = require('../db/connection');
 
 // Absolute Path
 const path = require("path");
@@ -31,6 +31,28 @@ app.listen(PORT, () => {
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "..", "index.html"));
 });
+
+
+app.post('/login', async (req, res) => {
+    // Get data from form.
+    const { email, password } = req.body;
+    
+    console.log( email, password );
+
+    try {
+        const info = await spLogin(email, password);
+
+        if (info.success) {
+            res.json({success: true, message:'Se ha iniciado sesión correctamente!', userInfo: info.userInfo});
+        } else {
+            res.json({success: false, message:'Credenciales inválidas.'});
+        }
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, message:'Ha ocurrido un error en el servidor.'});
+    }
+});
+
 
 app.get('/obtenerRoles', async (req, res) => {
     try {

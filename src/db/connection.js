@@ -21,6 +21,31 @@ const config = {
 
 // Functions
 
+
+async function spLogin(email, password) {
+  try {
+    const pool = await sql.connect(config);
+
+    const result = await pool
+      .request()
+      .input("Email", sql.VarChar(100), email)
+      .input("Contraseña", sql.VarChar(50), password)
+      .execute("InfoUsuarioxEmailYContraseña");
+
+    if (result.recordset.length > 0) {
+      const Info = {
+        success: true,
+        userInfo: result.recordset[0]
+      }
+      return Info;
+    }
+    return false;
+  } catch (error) {
+    console.error(`Error executing spPetCare_Login: ${error}.`);
+    return false;
+  }
+}
+
 async function spObtenerRoles() {
   try {
     const pool = await sql.connect(config);
@@ -390,4 +415,5 @@ module.exports = {
   configurarRolPermiso,
   insertarNuevoVuelo,
   spObtenerInfoVuelos,
+  spLogin,
 };
