@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Importamos las funciones que estabamos exportando desde el archivo de "connection.js".
-const { spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas, insertarRolAsync, insertarPermisoAsync, insertarTipoTarifa, insertarTarifaAsync, insertarMonedaAsync, insertarPaisAsync, insertarCiudadAsync, insertarAeropuertoAsync, configurarRolPermiso, insertarNuevoVuelo, spObtenerInfoVuelos, spLogin } = require('../db/connection');
+const { spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas, insertarRolAsync, insertarPermisoAsync, insertarTipoTarifa, insertarTarifaAsync, insertarMonedaAsync, insertarPaisAsync, insertarCiudadAsync, insertarAeropuertoAsync, configurarRolPermiso, insertarNuevoVuelo, spObtenerInfoVuelos, spLogin, getUserBalance, updateUserBalance } = require('../db/connection');
 
 // Absolute Path
 const path = require("path");
@@ -245,18 +245,85 @@ app.post('/registrarVuelo', async (req, res) => {
 
 app.post('/pagar', async(req, res) => {
     try {
-        let { tarjeta, fechaVencimiento, codigo, infoVuelo } = req.body;
+        // Get all data needed
+        let { tarjeta, fechaVencimiento, codigo, infoVuelo, userInfo } = req.body;
         tarjeta = tarjeta.replace(/\s/g, '');
 
         const {VueloID, AeropuertoOrigen, AeropuertoDestino, FechaVuelo, HoraSalida, HoraLlegada, DescripcionTipoTarifa, Precio, DetallesAerolinea, DuracionVuelo, cantidadPersonas} = infoVuelo;
 
+        const {UserID, Nombre, Email, NumeroTarjeta, Codigo, FechaVencimiento} = userInfo;
+
+
         // Precio Total:
         let total = Precio * cantidadPersonas;
 
-        console.log(`El total a pagar es: ${total}`);
+        // Saldo del usuario:
+        let saldo = await getUserBalance(UserID);
 
-        //
+        const factura = `
+            <h1>Flight CUC - Factura</h1>
+            <h2>Usted ha comprado ${cantidadPersonas} voletos para la fecha ${FechaVuelo} con un monto total de: ${total}</h2>
+            <h2>Esperamos que tengas un gran viaje ${Nombre}!</h2>
+            <h3>Aereopuerto Origen: ${AeropuertoOrigen} <span>Hora Salida: ${HoraSalida}</span></h3>
+            <h3>Aereopuerto Destino: ${AeropuertoDestino} <span>Hora Llegada: ${HoraLlegada}</span></h3>
+        `
+
+        console.log(`Saldo del usuario: ${saldo}`);
+
+        // Validate that is the correct data associated with user.
+        if (NumeroTarjeta === tarjeta && FechaVencimiento === fechaVencimiento && Codigo === codigo) {
+
+            // Make purchase.
+            if (saldo >= total) {
+                console.log('Se puede hacer la compra.')
+                
+                // Actualizar saldo del usuario
+                await updateUserBalance(UserID, total)
+
+                // Send recipe to user email.
+                sendEmail(Email, factura)
+
+                // Response
+                res.json({success: true, message: `Compra realizada, se ha enviado la factura a ${Email}.`});
+            } else {
+                console.log('No se puede hacer la compra.');
+                res.json({success: false, message: `Fondos insuficientes....`});
+            }
+        } else {
+
+            res.json({success: false, message: `Los datos de la tarjeta no son válidos.`});
+        }
+
+
+        
+
+        
     } catch (error) {
-        console.log(error);
+        console.log(`Se ha producido un error en el servidor... ${error}`);
+        res.json({success: false, message: `Se ha producido un error en el servidor...`});
     }
 });
+
+// Funcions
+async function sendEmail(destinatario, mensaje) {
+    const nodemailer = require('nodemailer');
+
+    // SMPTP Configuration
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+        user: 'bransti20@gmail.com',
+        pass: 'gxpssgblrkvrplsy'
+        }
+    });
+
+    // Email configuration
+    let info = await transporter.sendMail({
+        from: 'bransti20@gmail.com',
+        to: destinatario,
+        subject: 'CUC Flight- Factura Voletos',
+        html: mensaje
+    });
+
+    console.log(`Correo enviado. Key del correo: ${info.messageId}`);
+}

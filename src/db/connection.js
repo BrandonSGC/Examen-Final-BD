@@ -395,6 +395,44 @@ async function spObtenerInfoVuelos(CiudadOrigenID, CiudadDestinoID, fechaSalida,
   }
 }
 
+async function getUserBalance(userID) {
+  try {
+    const pool = await sql.connect(config);
+
+    const result = await pool
+      .request()
+      .input('user_id', sql.Int, userID)
+      .execute("getUserBalance");
+
+    if (result.recordset.length > 0) {
+      pool.close();
+      const {Saldo} = result.recordset[0];
+      return Saldo;
+    } else {
+      return false;
+    }
+  } catch {
+    console.error("Error al obtener el Saldo del usuario...");
+  }
+}
+
+async function updateUserBalance(userID, total) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input('user_id', sql.Int, userID)
+      .input('total', sql.Decimal(10,2), total)
+      .execute("updateUserBalance");
+
+    console.log('Saldo actualizado exitosamente...');
+  } catch {
+    console.error("Error al actualizar el Saldo del usuario...");
+  }
+}
+
+
 
 module.exports = {
   spRegistrarUsuario,
@@ -416,4 +454,6 @@ module.exports = {
   insertarNuevoVuelo,
   spObtenerInfoVuelos,
   spLogin,
+  getUserBalance,
+  updateUserBalance,
 };

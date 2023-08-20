@@ -40,14 +40,7 @@ function comprar(evt) {
         body: JSON.stringify(data),
     })
         .then(datos => datos.json())
-        .then(vuelos => {
-            if (vuelos.message === "No se encontraron vuelos") {
-                alert('No se encontraron vuelos...');
-            } else {
-                mostrarVuelos(vuelos);
-            }
-            
-        })
+        .then(response => showAlert(response))
         .catch( (error) => console.error(error))
 }
 
@@ -60,4 +53,14 @@ function cargarUserInfo() {
 
     const total = document.querySelector('#total')
     total.textContent = cantidadPersonas * Precio;
+}
+
+
+function showAlert(messageObject) {
+    const { success, message } = messageObject;
+
+    const alert = document.querySelector('#alert');
+    
+    alert.classList.add('alert');
+    alert.textContent = message;
 }
