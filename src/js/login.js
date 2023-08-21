@@ -48,8 +48,18 @@ function showAlert(messageObject) {
         localStorage.setItem('userInfo', JSON.stringify(userInfo))
         console.log(userInfo);
 
-        // const { id_usuario, nombre, apellidos, email, contrasena } = userInfo;
-        // console.log(id_usuario, nombre, apellidos, email, contrasena);
+        // Set admin state to local storage.
+        const {RolID} = userInfo;
+        let isAdmin = false
+
+        console.log(RolID);
+        if (RolID == 9) {
+            isAdmin = true;
+        } else {
+            isAdmin = false;
+        }
+        
+        localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
 
     } else {
         alert.classList.add('alert');
@@ -60,5 +70,7 @@ function showAlert(messageObject) {
         localStorage.setItem('loginState', JSON.stringify(loginState));
 
         localStorage.removeItem('userInfo');
+
+        localStorage.removeItem('isAdmin');
     }
 }
