@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Importamos las funciones que estabamos exportando desde el archivo de "connection.js".
-const { spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas, insertarRolAsync, insertarPermisoAsync, insertarTipoTarifa, insertarTarifaAsync, insertarMonedaAsync, insertarPaisAsync, insertarCiudadAsync, insertarAeropuertoAsync, configurarRolPermiso, insertarNuevoVuelo, spObtenerInfoVuelos, spLogin, getUserBalance, updateUserBalance, crearCuentaBancaria } = require('../db/connection');
+const { spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas, insertarRolAsync, insertarPermisoAsync, insertarTipoTarifa, insertarTarifaAsync, insertarMonedaAsync, insertarPaisAsync, insertarCiudadAsync, insertarAeropuertoAsync, configurarRolPermiso, insertarNuevoVuelo, spObtenerInfoVuelos, spLogin, getUserBalance, updateUserBalance, crearCuentaBancaria, spRegistrarUsuarioRolD } = require('../db/connection');
 
 // Absolute Path
 const path = require("path");
@@ -137,6 +137,20 @@ app.post('/registrarUsuario', async (req, res) => {
         const { nombre, apellido, identificacion, email, contrasena, telefono, fechaNacimiento, rol} = req.body;
 
         await spRegistrarUsuario(email, contrasena, rol, identificacion, nombre, apellido, fechaNacimiento, telefono);
+        res.send('Usuario registrado con éxito!');
+
+    } catch (error) {
+        res.send(`Se ha producido un error al registrar el usuario. ${error}`);
+    }
+});
+
+app.post('/registrarUsuarioRolD', async (req, res) => {
+    try {
+        // Obtenemos los datos que envia el formulario.
+        const { nombre, apellido, identificacion, email, contrasena, telefono, fechaNacimiento} = req.body;
+        console.log(nombre, apellido, identificacion, email, contrasena, telefono, fechaNacimiento);
+
+        await spRegistrarUsuarioRolD(email, contrasena, identificacion, nombre, apellido, fechaNacimiento, telefono);
         res.send('Usuario registrado con éxito!');
 
     } catch (error) {

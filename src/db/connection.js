@@ -185,7 +185,28 @@ async function spRegistrarUsuario(email, contrasena, rolID, identificacion, nomb
   }
 }
 
-// Inserts Yeison:
+
+async function spRegistrarUsuarioRolD(email, contrasena, identificacion, nombre, apellido, fechaNacimiento, telefono) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input("Email", sql.VarChar(100), email)
+      .input("Contraseña", sql.VarChar(100), contrasena)
+      .input("Identificacion", sql.VarChar(20), identificacion)
+      .input("Nombre", sql.VarChar(50), nombre)
+      .input("Apellido", sql.VarChar(50), apellido)
+      .input("Fecha_de_nacimiento", sql.Date, fechaNacimiento)
+      .input("Número_de_teléfono", sql.VarChar(20), telefono)
+      .execute("RegistrarUsuarioRolDefecto");
+      console.log('Usuario registrado correctamente!')
+
+    pool.close();
+  } catch (err) {
+    console.error("Error executing the stored procedure spRegistrarUsuario:", err);
+  }
+}
 
 
 async function insertarRolAsync(descripcionRol) {
@@ -475,4 +496,5 @@ module.exports = {
   getUserBalance,
   updateUserBalance,
   crearCuentaBancaria,
+  spRegistrarUsuarioRolD,
 };
