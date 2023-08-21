@@ -129,6 +129,7 @@ function obtenerVuelos() {
 }
 
 function mostrarVuelos(vuelos) {
+
     vuelos.forEach(vuelo => {
         console.log(vuelo);
 
@@ -146,17 +147,28 @@ function mostrarVuelos(vuelos) {
         // Save the json in local storage
         localStorage.setItem('infoVuelo', infoVuelo);
 
+        // Format hours correctly
+        const horaLlegada = HoraLlegada;
+        const horaLegible = formatTime(HoraLlegada);
+
+        console.log(`Hora de llegada formateada: ${horaLegible}`);
+
         flightCard.className = 'flightCard';
         flightCard.innerHTML = `
         <div class="flightCard__field flightCard__field--flight">
             <div class="flightCard__origin">
                 <h3>${AeropuertoOrigen}</h3>
-                <p>${HoraSalida}</p>
+                <p>${formatTime(HoraSalida)}</p>
             </div>
-            <img class="flightCard__image" src="./img/plane.png" alt="Plane">
+            
+            <div class="flightCard__origin">
+                <img class="flightCard__image" src="./img/plane.png" alt="Plane">
+                <p>${formatDate(FechaVuelo)}</p>
+            </div>
+            
             <div class="flightCard__origin">
                 <h3>${AeropuertoDestino}</h3>
-                <p>${HoraLlegada}</p>
+                <p>${formatTime(HoraLlegada)}</p>
             </div>
         </div>
         <div class="flightCard__field flightCard__field--buy">
@@ -168,4 +180,17 @@ function mostrarVuelos(vuelos) {
         `
         vuelos.appendChild(flightCard);
     });
+}
+
+
+function formatDate(dateString) {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
+    return formattedDate;
+}
+
+function formatTime(timeString) {
+    const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+    const formattedTime = new Date(timeString).toLocaleTimeString('en-US', options);
+    return formattedTime;
 }

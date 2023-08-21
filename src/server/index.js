@@ -262,10 +262,10 @@ app.post('/pagar', async(req, res) => {
 
         const factura = `
             <h1>Flight CUC - Factura</h1>
-            <h2>Usted ha comprado ${cantidadPersonas} voletos para la fecha ${FechaVuelo} con un monto total de: ${total}</h2>
+            <h2>Usted ha comprado ${cantidadPersonas} voletos para la fecha ${formatDate(FechaVuelo)} con un monto total de: $${total}</h2>
             <h2>Esperamos que tengas un gran viaje ${Nombre}!</h2>
-            <h3>Aereopuerto Origen: ${AeropuertoOrigen} <span>Hora Salida: ${HoraSalida}</span></h3>
-            <h3>Aereopuerto Destino: ${AeropuertoDestino} <span>Hora Llegada: ${HoraLlegada}</span></h3>
+            <h3>Aereopuerto Origen: ${AeropuertoOrigen} <span>Hora Salida: ${formatTime(HoraSalida)}</span></h3>
+            <h3>Aereopuerto Destino: ${AeropuertoDestino} <span>Hora Llegada: ${formatTime(HoraLlegada)}</span></h3>
         `
 
         console.log(`Saldo del usuario: ${saldo}`);
@@ -326,4 +326,17 @@ async function sendEmail(destinatario, mensaje) {
     });
 
     console.log(`Correo enviado. Key del correo: ${info.messageId}`);
+}
+
+function formatDate(dateString) {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
+    return formattedDate;
+}
+
+
+function formatTime(timeString) {
+    const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+    const formattedTime = new Date(timeString).toLocaleTimeString('en-US', options);
+    return formattedTime;
 }

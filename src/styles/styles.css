@@ -117,6 +117,13 @@ li {
     padding: 2rem 0;
 }
 
+.flightCard__origin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #buscar {
     margin-top: 2rem;
     grid-column: 2 / 3;
