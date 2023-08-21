@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>Mantenimiento Cuenta Bancaria</title>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header__container">
+            <div class="header__display">
+                <a href="index.html" class="header__logo">
+                    <h1>LOGO</h1>
+                </a>
+                <nav class="navigation">
+                    <a href="./login.html" class="navigation__link">Iniciar Sesión</a>
+                    <a href="#" class="navigation__link">Vuelos</a>
+                    <a href="./configuracion.html" class="navigation__link">Configuración</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- FORMULARIO DE CUENTA BANCARIA -->
+    <section class="section">
+        <div class="section__container">
+            <h2 class="section__heading">Mantenimiento de Cuenta Bancaria</h2>
+            <form action="/cuentaBancaria" method="post" class="form" id="aereopuertosForm">
+                <fieldset class="form__fieldset">
+                    <div class="form__field">
+                        <label for="numTarjeta" class="form__label">Numero de Tarjeta:</label>
+                        <input class="form__input" type="text" name="numTarjeta" id="numTarjeta" placeholder="Ejemplo: 0000 0000 0000 0000">
+                    </div>
+
+                    <fieldset class="form__fieldset form__fieldset--purchase">
+                        <div class="form__field">
+                            <label for="fechaVencimiento" class="form__label">Fecha de Vencimiento:</label>
+                            <input class="form__input form__input--purchase" type="text" name="fechaVencimiento" id="fechaVencimiento" placeholder="Ejemplo: 03/23" required>
+                        </div>
+                        <div class="form__field">
+                            <label for="codigo" class="form__label">Código:</label>
+                            <input class="form__input form__input--purchase" type="password" name="codigo" id="codigo" placeholder="Ej: 123">
+                        </div>
+                    </fieldset>
+                    
+                    <div class="form__field">
+                        <label for="saldo" class="form__label">Saldo:</label>
+                        <input class="form__input" type="number" name="saldo" id="saldo">
+                    </div>
+
+                </fieldset>
+                <button id="crearCuenta" class="form__button" type="submit">Crear Cuenta Bancaria</button>
+            </form>
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <header class="footer__header">
+            <h3 class="footer__heading">Administración de Bases de Datos.</h3>
+        </header>
+        
+        <div class="footer__container">
+            <div class="footer__display">          
+            <div class="footer__column">
+                <h4 class="">Universidad:</h4>
+                <img class="cuc" src="./img/CUC.png" alt="CUC logo">
+                <a href="https://www.cuc.ac.cr/" target="_blank">Colegio Universitario de Cartago</a>
+            </div>
+    
+            <div class="footer__column">
+                <h4>Estudiantes:</h4>
+                <p>Brandon Gomez Carvajal</p>
+                <p>Mario Araya Fuentes</p>
+                <p>Yeison Hernandez Sanabria</p>
+                <p>Ana Najera Gomez</p>
+            </div>
+    
+            <div class="footer__column">
+                <h4>Acerca de:</h4>
+                <p>En este proyecto se han utilizado las tecnologías de HTML, CSS, Javascript, NodeJS, Express, SQL Server para el Examen Final de la materia Administración de Bases de Datos.</p>
+            </div>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="./js/cuentaBancaria.js"></script>
+</body>
+</html>

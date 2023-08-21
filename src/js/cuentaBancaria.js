@@ -1,6 +1,5 @@
 // Variables
-const infoVuelo = JSON.parse(localStorage.getItem('infoVuelo'));
-const btnRealizarCompra = document.querySelector('#btnRelizarCompra')
+const btnCrearCuenta = document.querySelector('#crearCuenta')
 
 // Obtener info del usuario
 const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -9,29 +8,31 @@ console.log(userInfo);
 
 // Events
 document.addEventListener('DOMContentLoaded', () => {
-    cargarUserInfo();
-    console.log(infoVuelo);
-    btnRealizarCompra.addEventListener('click', crearCuenta);
+    btnCrearCuenta.addEventListener('click', crearCuenta);
 });
 
 
 // Functions
 function crearCuenta(evt) {
     evt.preventDefault();
-    const tarjeta = document.getElementById("tarjeta").value;
+    const tarjeta = document.getElementById("numTarjeta").value;
     const fechaVencimiento = document.getElementById("fechaVencimiento").value;
     const codigo = document.getElementById("codigo").value;
+    const saldo = document.getElementById("saldo").value;
 
+    const {UserID} = userInfo;
+
+    console.log(tarjeta, fechaVencimiento, codigo, saldo);
 
     const data = {
         tarjeta,
         fechaVencimiento,
         codigo,
-        infoVuelo: infoVuelo,
-        userInfo,
+        saldo,
+        UserID,
     };
 
-    fetch('/pagar', {
+    fetch('/cuentaBancaria', {
         method: "POST",
         headers: {
         Accept: "application/json",
@@ -47,12 +48,7 @@ function crearCuenta(evt) {
 
 function cargarUserInfo() {
     const { Nombre, Apellido} = userInfo;
-    const { Precio, cantidadPersonas} = infoVuelo;
-    const userName = document.querySelector('#nombreCompleto');
-    userName.textContent = `${Nombre} ${Apellido}`;
-
-    const total = document.querySelector('#total')
-    total.textContent = cantidadPersonas * Precio;
+    
 }
 
 

@@ -433,6 +433,24 @@ async function updateUserBalance(userID, total) {
 }
 
 
+async function crearCuentaBancaria(UserID, tarjeta, codigo, fechaVencimiento, saldo) {
+  try {
+    const pool = await sql.connect(config);
+
+    await pool
+      .request()
+      .input('user_id', sql.Int, UserID)
+      .input('numTarjeta', sql.VarChar(16), tarjeta)
+      .input('fechaVencimiento', sql.VarChar(5), fechaVencimiento)
+      .input('codigo', sql.VarChar(3), codigo)
+      .input('saldo', sql.Decimal(12,2), saldo)
+      .execute("crearCuentaBancaria");
+
+    console.log('Cuenta creada exitosamente...');
+  } catch {
+    console.error("Error al crear la cuenta del usuario...");
+  }
+}
 
 module.exports = {
   spRegistrarUsuario,
@@ -456,4 +474,5 @@ module.exports = {
   spLogin,
   getUserBalance,
   updateUserBalance,
+  crearCuentaBancaria,
 };

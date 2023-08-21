@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Importamos las funciones que estabamos exportando desde el archivo de "connection.js".
-const { spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas, insertarRolAsync, insertarPermisoAsync, insertarTipoTarifa, insertarTarifaAsync, insertarMonedaAsync, insertarPaisAsync, insertarCiudadAsync, insertarAeropuertoAsync, configurarRolPermiso, insertarNuevoVuelo, spObtenerInfoVuelos, spLogin, getUserBalance, updateUserBalance } = require('../db/connection');
+const { spRegistrarUsuario, spObtenerRoles, spObtenerPermisos, spObtenerCiudades, spObtenerPaises, spObtenerAereopuertos, spObtenerTiposDeTarifas, insertarRolAsync, insertarPermisoAsync, insertarTipoTarifa, insertarTarifaAsync, insertarMonedaAsync, insertarPaisAsync, insertarCiudadAsync, insertarAeropuertoAsync, configurarRolPermiso, insertarNuevoVuelo, spObtenerInfoVuelos, spLogin, getUserBalance, updateUserBalance, crearCuentaBancaria } = require('../db/connection');
 
 // Absolute Path
 const path = require("path");
@@ -294,15 +294,28 @@ app.post('/pagar', async(req, res) => {
             res.json({success: false, message: `Los datos de la tarjeta no son válidos.`});
         }
 
-
-        
-
-        
     } catch (error) {
         console.log(`Se ha producido un error en el servidor... ${error}`);
         res.json({success: false, message: `Se ha producido un error en el servidor...`});
     }
 });
+
+
+app.post('/cuentaBancaria', async (req, res) => {
+    try {
+        let {UserID, tarjeta, codigo, fechaVencimiento, saldo} = req.body;
+        tarjeta = tarjeta.replace(/\s/g, '');
+
+        console.log(UserID, tarjeta, codigo, fechaVencimiento, saldo);
+
+        await crearCuentaBancaria(UserID, tarjeta, codigo, fechaVencimiento, saldo);
+
+        res.json({message:'Cuenta creada con éxito!'});
+    } catch (error) {
+        res.json({message:'Se ha producido un error al crear la Cuenta'});
+    }
+});
+
 
 // Funcions
 async function sendEmail(destinatario, mensaje) {
