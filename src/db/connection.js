@@ -1,26 +1,19 @@
-/* En este archivo vamos a trabajar todo respecto a la base 
-de datos, como por ejemplo la conexion, funciones para 
-obtener / enviar datos a la DB etc...*/
 const sql = require("mssql");
+
 // Database Connection
-/* Este es un "object literal" basicamente un simple objeto
-donde tienen que poner su usuario, password y el nombre de 
-la base de datos para que les funcione su conexion. */
 const config = {
-    user: "sa",
-    password: "root",
-    server: "localhost",
-    // port: 19630,
-    database: "ExamenFinalBD",
-    options: {
-      encrypt: true,
-      trustServerCertificate: true,
-    },
+  user: "sa",
+  password: "root",
+  server: "localhost",
+  // port: 19630,
+  database: "ExamenFinalBD",
+  options: {
+    encrypt: true,
+    trustServerCertificate: true,
+  },
 };
 
-
 // Functions
-
 
 async function spLogin(email, password) {
   try {
@@ -35,8 +28,8 @@ async function spLogin(email, password) {
     if (result.recordset.length > 0) {
       const Info = {
         success: true,
-        userInfo: result.recordset[0]
-      }
+        userInfo: result.recordset[0],
+      };
       return Info;
     }
     return false;
@@ -50,15 +43,13 @@ async function spObtenerRoles() {
   try {
     const pool = await sql.connect(config);
 
-    const result = await pool
-      .request()
-      .execute("ConsultarRoles");
+    const result = await pool.request().execute("ConsultarRoles");
 
     if (result.recordset.length > 0) {
       return result.recordset;
       pool.close();
     } else {
-      return 'No se han encontrado roles.';
+      return "No se han encontrado roles.";
     }
   } catch {
     console.error("Error al obtener los roles.");
@@ -69,15 +60,13 @@ async function spObtenerPermisos() {
   try {
     const pool = await sql.connect(config);
 
-    const result = await pool
-      .request()
-      .execute("ConsultarPermisos");
+    const result = await pool.request().execute("ConsultarPermisos");
 
     if (result.recordset.length > 0) {
       return result.recordset;
       pool.close();
     } else {
-      return 'No se han encontrado permisos';
+      return "No se han encontrado permisos";
     }
   } catch {
     console.error("Error al obtener los permisos.");
@@ -88,15 +77,13 @@ async function spObtenerPaises() {
   try {
     const pool = await sql.connect(config);
 
-    const result = await pool
-      .request()
-      .execute("ConsultarPaises");
+    const result = await pool.request().execute("ConsultarPaises");
 
     if (result.recordset.length > 0) {
       return result.recordset;
       pool.close();
     } else {
-      return 'No se han encontrado paises.';
+      return "No se han encontrado paises.";
     }
   } catch {
     console.error("Error al obtener los paises.");
@@ -107,15 +94,13 @@ async function spObtenerCiudades() {
   try {
     const pool = await sql.connect(config);
 
-    const result = await pool
-      .request()
-      .execute("ConsultarCiudades");
+    const result = await pool.request().execute("ConsultarCiudades");
 
     if (result.recordset.length > 0) {
       return result.recordset;
       pool.close();
     } else {
-      return 'No se han encontrado ciudades.';
+      return "No se han encontrado ciudades.";
     }
   } catch {
     console.error("Error al obtener las ciudades.");
@@ -126,15 +111,13 @@ async function spObtenerAereopuertos() {
   try {
     const pool = await sql.connect(config);
 
-    const result = await pool
-      .request()
-      .execute("ConsultarAereopuertos");
+    const result = await pool.request().execute("ConsultarAereopuertos");
 
     if (result.recordset.length > 0) {
       return result.recordset;
       pool.close();
     } else {
-      return 'No se han encontrado aereopuertos.';
+      return "No se han encontrado aereopuertos.";
     }
   } catch {
     console.error("Error al obtener aereopuertos.");
@@ -145,15 +128,13 @@ async function spObtenerTiposDeTarifas() {
   try {
     const pool = await sql.connect(config);
 
-    const result = await pool
-      .request()
-      .execute("ConsultarTiposDeTarifas");
+    const result = await pool.request().execute("ConsultarTiposDeTarifas");
 
     if (result.recordset.length > 0) {
       return result.recordset;
       pool.close();
     } else {
-      return 'No se han encontrado Tipos de Tarifas.';
+      return "No se han encontrado Tipos de Tarifas.";
     }
   } catch {
     console.error("Error al obtener los Tipos de Tarifas.");
@@ -161,7 +142,16 @@ async function spObtenerTiposDeTarifas() {
 }
 
 // Inserts
-async function spRegistrarUsuario(email, contrasena, rolID, identificacion, nombre, apellido, fechaNacimiento, telefono) {
+async function spRegistrarUsuario(
+  email,
+  contrasena,
+  rolID,
+  identificacion,
+  nombre,
+  apellido,
+  fechaNacimiento,
+  telefono
+) {
   try {
     const pool = await sql.connect(config);
 
@@ -177,16 +167,26 @@ async function spRegistrarUsuario(email, contrasena, rolID, identificacion, nomb
       .input("Número_de_teléfono", sql.VarChar(20), telefono)
       // Este es el nombre del procedimiento almacenado que vamos a llamar.
       .execute("RegistrarUsuario");
-      console.log('Usuario registrado correctamente!')
+    console.log("Usuario registrado correctamente!");
 
     pool.close();
   } catch (err) {
-    console.error("Error executing the stored procedure spRegistrarUsuario:", err);
+    console.error(
+      "Error executing the stored procedure spRegistrarUsuario:",
+      err
+    );
   }
 }
 
-
-async function spRegistrarUsuarioRolD(email, contrasena, identificacion, nombre, apellido, fechaNacimiento, telefono) {
+async function spRegistrarUsuarioRolD(
+  email,
+  contrasena,
+  identificacion,
+  nombre,
+  apellido,
+  fechaNacimiento,
+  telefono
+) {
   try {
     const pool = await sql.connect(config);
 
@@ -200,14 +200,16 @@ async function spRegistrarUsuarioRolD(email, contrasena, identificacion, nombre,
       .input("Fecha_de_nacimiento", sql.Date, fechaNacimiento)
       .input("Número_de_teléfono", sql.VarChar(20), telefono)
       .execute("RegistrarUsuarioRolDefecto");
-      console.log('Usuario registrado correctamente!')
+    console.log("Usuario registrado correctamente!");
 
     pool.close();
   } catch (err) {
-    console.error("Error executing the stored procedure spRegistrarUsuario:", err);
+    console.error(
+      "Error executing the stored procedure spRegistrarUsuario:",
+      err
+    );
   }
 }
-
 
 async function insertarRolAsync(descripcionRol) {
   try {
@@ -217,8 +219,8 @@ async function insertarRolAsync(descripcionRol) {
       .request()
       .input("Descripción_del_rol", sql.VarChar(100), descripcionRol)
       .execute("InsertarRol");
-    
-    console.log('Rol insertado correctamente!')
+
+    console.log("Rol insertado correctamente!");
 
     pool.close();
   } catch (err) {
@@ -234,8 +236,8 @@ async function insertarPermisoAsync(descripcionPermiso) {
       .request()
       .input("Descripción_del_permiso", sql.VarChar(100), descripcionPermiso)
       .execute("InsertarPermiso");
-    
-    console.log('Permiso insertado correctamente!')
+
+    console.log("Permiso insertado correctamente!");
 
     pool.close();
   } catch (err) {
@@ -252,8 +254,8 @@ async function configurarRolPermiso(rolID, permisoID) {
       .input("RolID", sql.Int, rolID)
       .input("PermisoID", sql.Int, permisoID)
       .execute("ConfigurarRolesPermisos");
-    
-    console.log('Configuracion realizada correctamente!')
+
+    console.log("Configuracion realizada correctamente!");
 
     pool.close();
   } catch (err) {
@@ -269,8 +271,8 @@ async function insertarTipoTarifa(descripcionTipoTarifa) {
       .request()
       .input("Descripción", sql.VarChar(100), descripcionTipoTarifa)
       .execute("InsertarTipoTarifa");
-    
-    console.log('Tipo de Tarifa insertado correctamente!')
+
+    console.log("Tipo de Tarifa insertado correctamente!");
 
     pool.close();
   } catch (err) {
@@ -289,15 +291,14 @@ async function insertarTarifaAsync(vueloID, tipoTarifaID, precio) {
       .input("TipoTarifaID", sql.Int, tipoTarifaID)
       .input("Precio", sql.Decimal(10, 2), precio)
       .execute("InsertarTarifa");
-    
-    console.log('Tarifa insertada correctamente!')
+
+    console.log("Tarifa insertada correctamente!");
 
     pool.close();
   } catch (err) {
     console.error("Error al insertar la tarifa:", err);
   }
 }
-
 
 async function insertarMonedaAsync(nombre, valor) {
   try {
@@ -308,8 +309,8 @@ async function insertarMonedaAsync(nombre, valor) {
       .input("Nombre", sql.VarChar(30), nombre)
       .input("Valor", sql.Decimal(10, 2), valor)
       .execute("InsertarMoneda");
-    
-    console.log('Moneda insertada correctamente!')
+
+    console.log("Moneda insertada correctamente!");
 
     pool.close();
   } catch (err) {
@@ -325,8 +326,8 @@ async function insertarPaisAsync(nombrePais) {
       .request()
       .input("Nombre_del_país", sql.VarChar(100), nombrePais)
       .execute("InsertarPais");
-    
-    console.log('País insertado correctamente!')
+
+    console.log("País insertado correctamente!");
 
     pool.close();
   } catch (err) {
@@ -343,8 +344,8 @@ async function insertarCiudadAsync(nombreCiudad, paisID) {
       .input("Nombre_de_la_ciudad", sql.VarChar(100), nombreCiudad)
       .input("PaisID", sql.Int, paisID)
       .execute("InsertarCiudad");
-    
-    console.log('Ciudad insertada correctamente!')
+
+    console.log("Ciudad insertada correctamente!");
 
     pool.close();
   } catch (err) {
@@ -361,8 +362,8 @@ async function insertarAeropuertoAsync(nombreAeropuerto, ciudadID) {
       .input("Nombre_del_aeropuerto", sql.VarChar(100), nombreAeropuerto)
       .input("CiudadID", sql.Int, ciudadID)
       .execute("InsertarAeropuerto");
-    
-    console.log('Aeropuerto insertado correctamente!')
+
+    console.log("Aeropuerto insertado correctamente!");
 
     pool.close();
   } catch (err) {
@@ -370,7 +371,14 @@ async function insertarAeropuertoAsync(nombreAeropuerto, ciudadID) {
   }
 }
 
-async function insertarNuevoVuelo(origen, destino, fechaVuelo, horaSalida, horaLlegada, tipoTarifa) {
+async function insertarNuevoVuelo(
+  origen,
+  destino,
+  fechaVuelo,
+  horaSalida,
+  horaLlegada,
+  tipoTarifa
+) {
   try {
     const pool = await sql.connect(config);
 
@@ -383,8 +391,8 @@ async function insertarNuevoVuelo(origen, destino, fechaVuelo, horaSalida, horaL
       .input("HoraLlegada", horaLlegada)
       .input("IdTipoTarifa", sql.Int, tipoTarifa)
       .execute("CreaNuevoVuelo");
-    
-    console.log('Nuevo vuelo creado correctamente!')
+
+    console.log("Nuevo vuelo creado correctamente!");
 
     pool.close();
   } catch (err) {
@@ -392,17 +400,21 @@ async function insertarNuevoVuelo(origen, destino, fechaVuelo, horaSalida, horaL
   }
 }
 
-
-async function spObtenerInfoVuelos(CiudadOrigenID, CiudadDestinoID, fechaSalida, TipoTarifaID) {
+async function spObtenerInfoVuelos(
+  CiudadOrigenID,
+  CiudadDestinoID,
+  fechaSalida,
+  TipoTarifaID
+) {
   try {
     const pool = await sql.connect(config);
 
     const result = await pool
       .request()
-      .input('CiudadOrigenID', sql.Int, CiudadOrigenID)
-      .input('CiudadDestinoID', sql.Int, CiudadDestinoID)
-      .input('fechaSalida', sql.Date, fechaSalida)
-      .input('TipoTarifaID', sql.Int, TipoTarifaID)
+      .input("CiudadOrigenID", sql.Int, CiudadOrigenID)
+      .input("CiudadDestinoID", sql.Int, CiudadDestinoID)
+      .input("fechaSalida", sql.Date, fechaSalida)
+      .input("TipoTarifaID", sql.Int, TipoTarifaID)
       .execute("ObtenerInfoVuelos");
 
     if (result.recordset.length > 0) {
@@ -422,12 +434,12 @@ async function getUserBalance(userID) {
 
     const result = await pool
       .request()
-      .input('user_id', sql.Int, userID)
+      .input("user_id", sql.Int, userID)
       .execute("getUserBalance");
 
     if (result.recordset.length > 0) {
       pool.close();
-      const {Saldo} = result.recordset[0];
+      const { Saldo } = result.recordset[0];
       return Saldo;
     } else {
       return false;
@@ -443,31 +455,36 @@ async function updateUserBalance(userID, total) {
 
     await pool
       .request()
-      .input('user_id', sql.Int, userID)
-      .input('total', sql.Decimal(10,2), total)
+      .input("user_id", sql.Int, userID)
+      .input("total", sql.Decimal(10, 2), total)
       .execute("updateUserBalance");
 
-    console.log('Saldo actualizado exitosamente...');
+    console.log("Saldo actualizado exitosamente...");
   } catch {
     console.error("Error al actualizar el Saldo del usuario...");
   }
 }
 
-
-async function crearCuentaBancaria(UserID, tarjeta, codigo, fechaVencimiento, saldo) {
+async function crearCuentaBancaria(
+  UserID,
+  tarjeta,
+  codigo,
+  fechaVencimiento,
+  saldo
+) {
   try {
     const pool = await sql.connect(config);
 
     await pool
       .request()
-      .input('user_id', sql.Int, UserID)
-      .input('numTarjeta', sql.VarChar(16), tarjeta)
-      .input('fechaVencimiento', sql.VarChar(5), fechaVencimiento)
-      .input('codigo', sql.VarChar(3), codigo)
-      .input('saldo', sql.Decimal(12,2), saldo)
+      .input("user_id", sql.Int, UserID)
+      .input("numTarjeta", sql.VarChar(16), tarjeta)
+      .input("fechaVencimiento", sql.VarChar(5), fechaVencimiento)
+      .input("codigo", sql.VarChar(3), codigo)
+      .input("saldo", sql.Decimal(12, 2), saldo)
       .execute("crearCuentaBancaria");
 
-    console.log('Cuenta creada exitosamente...');
+    console.log("Cuenta creada exitosamente...");
   } catch {
     console.error("Error al crear la cuenta del usuario...");
   }
